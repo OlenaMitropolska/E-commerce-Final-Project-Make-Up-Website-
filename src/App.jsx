@@ -1,5 +1,6 @@
 
 import './App.css';
+import Footer from './componentsPages/Footer';
 import Nav from './componentsPages/Nav';
 
 function App() {
@@ -7,6 +8,13 @@ function App() {
     <div data-theme="fantasy" className="App">
        <Nav />
        
+
+
+
+
+
+
+       <Footer />
     </div>
   );
 }
