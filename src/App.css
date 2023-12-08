@@ -30,15 +30,22 @@ main {
     }
 
 
+
+
+
+
+    
+    /* tablet query */
     @media only screen and (min-width: 912px) {
         .navbar {
-          padding: 0 40px;
+        padding-right: 20px;
         }
         .navbar-end {
             gap: 20px;
         }
         .sub-nav{
-            display: none;
+            display: flex;
+          justify-content: center;
         }
         .search-input {
           width: 500px;
@@ -48,6 +55,20 @@ main {
         }
         .input-nav {
           width: 500px;
+        }
+       
+    }
+
+    /* laptop query */
+    @media only screen and (min-width: 1200px) {
+        .navbar {
+          padding: 0 40px;
+        }
+        .navbar-end {
+            gap: 20px;
+        }
+        .sub-nav{
+            display: none;
         }
        
     }
