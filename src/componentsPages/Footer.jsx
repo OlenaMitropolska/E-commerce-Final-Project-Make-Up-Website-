@@ -8,10 +8,13 @@ function Footer() {
     <header className="footer-title">Company</header> 
     <a className="link link-hover">About us</a>
     <a className="link link-hover">Contact</a>
-    <a className="link link-hover">Delivery</a>
-    <a className="link link-hover">Help</a>
 
   </nav> 
+  <nav>
+    <header className="footer-title">Services</header> 
+    <a className="link link-hover">Delivery</a>
+    <a className="link link-hover">Help</a>
+  </nav>
   <nav>
     <header className="footer-title">Legal</header> 
     <a className="link link-hover">Terms of use</a>
