@@ -28,3 +28,26 @@ main {
         justify-content: center;
         align-items: center;
     }
+
+
+    @media only screen and (min-width: 912px) {
+        .navbar {
+          padding: 0 40px;
+        }
+        .navbar-end {
+            gap: 20px;
+        }
+        .sub-nav{
+            display: none;
+        }
+        .search-input {
+          width: 500px;
+        }
+        .search-input-form {
+            max-width: 500px;
+        }
+        .input-nav {
+          width: 500px;
+        }
+       
+    }
