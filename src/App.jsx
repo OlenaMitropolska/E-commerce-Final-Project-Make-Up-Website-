@@ -8,9 +8,9 @@ function App() {
     <div data-theme="fantasy" className="App">
        <Nav />
        
-
-
-
+<main>
+  
+</main>
 
 
 
