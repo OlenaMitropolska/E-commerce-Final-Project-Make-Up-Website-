@@ -7,6 +7,7 @@ import FavoritesPage from './componentsPages/FavoritesPage';
 import Home from './componentsPages/Home';
 import Cart from './componentsPages/Cart';
 import Login from './componentsPages/Login';
+import ErrorPage from './componentsPages/ErrorPage';
 
 
 function App() {
@@ -18,6 +19,7 @@ function App() {
 
 <Routes>
   <Route path='/' element={<Home />} />
+  <Route path='/*' element={<ErrorPage/>} />
 <Route path='/favoritespage' element={<FavoritesPage/>} />
 <Route path='/cart' element={<Cart />} />
 <Route path='/loginpage' element={<Login />} />
