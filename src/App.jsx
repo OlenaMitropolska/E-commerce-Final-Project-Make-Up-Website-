@@ -1,12 +1,12 @@
 
 import './App.css';
+import Nav from './componentsPages/Nav';
 
 function App() {
   return (
     <div data-theme="fantasy" className="App">
-       <h1 className="text-3xl font-bold underline">
-      Hello world!
-    </h1>
+       <Nav />
+       
     </div>
   );
 }
