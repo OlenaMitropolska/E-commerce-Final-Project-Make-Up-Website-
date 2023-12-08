@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Nav() {
   return (
@@ -21,7 +22,7 @@ function Nav() {
         <li><a>Item 3</a></li>
       </ul>
     </div>
-    <a className="btn btn-ghost text-xl">ESSENTIALIST</a>
+    <Link to={"/"}><a className="btn btn-ghost text-xl">ESSENTIALIST</a></Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
@@ -39,7 +40,9 @@ function Nav() {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+    <Link to={'/favoritespage'}><a class="text-2xl"><ion-icon name="heart-outline"></ion-icon></a></Link>
+    <Link to={'/loginpage'}><a class="text-2xl"><ion-icon name="person-outline"></ion-icon></a></Link>
+    <Link to={'/cart' }><a class="text-2xl"><ion-icon name="cart-outline"></ion-icon></a></Link>
   </div>
 </div>
     </div>
