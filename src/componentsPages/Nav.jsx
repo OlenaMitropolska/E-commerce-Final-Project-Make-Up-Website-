@@ -1,5 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import SearchInput from '../components/SearchInput'
 
 function Nav() {
   return (
@@ -39,12 +40,15 @@ function Nav() {
       <li><a>Item 3</a></li>
     </ul>
   </div>
-  <div className="navbar-end">
+  <div className="navbar-end gap-1">
     <Link to={'/favoritespage'}><a class="text-2xl"><ion-icon name="heart-outline"></ion-icon></a></Link>
     <Link to={'/loginpage'}><a class="text-2xl"><ion-icon name="person-outline"></ion-icon></a></Link>
     <Link to={'/cart' }><a class="text-2xl"><ion-icon name="cart-outline"></ion-icon></a></Link>
   </div>
+
+
 </div>
+<div className='sub-nav'><SearchInput/></div>
     </div>
   )
 }

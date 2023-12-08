@@ -8,6 +8,7 @@ import Home from './componentsPages/Home';
 import Cart from './componentsPages/Cart';
 import Login from './componentsPages/Login';
 
+
 function App() {
   return (
     <div data-theme="fantasy" className="App">
