@@ -26,9 +26,9 @@ function Nav() {
   <div className='search-input'><SearchInput/></div> 
   </div>
   <div className="navbar-end gap-1">
-    <Link to={'/favoritespage'}><a class="text-2xl"><ion-icon name="heart-outline"></ion-icon></a></Link>
-    <Link to={'/loginpage'}><a class="text-2xl"><ion-icon name="person-outline"></ion-icon></a></Link>
-    <Link to={'/cart' }><a class="text-2xl"><ion-icon name="bag-outline"></ion-icon></a></Link>
+    <Link to={'/favoritespage'}><a className="text-2xl"><ion-icon name="heart-outline"></ion-icon></a></Link>
+    <Link to={'/loginpage'}><a className="text-2xl"><ion-icon name="person-outline"></ion-icon></a></Link>
+    <Link to={'/cart' }><a className="text-2xl"><ion-icon name="bag-outline"></ion-icon></a></Link>
   </div>
 
 

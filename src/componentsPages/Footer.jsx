@@ -29,10 +29,10 @@ function Footer() {
   </aside> 
   <nav className="md:place-self-center md:justify-self-end">
     <div className="grid grid-flow-col gap-4">
-    <a target='blank' class="text-3xl" href="https://www.instagram.com/"><ion-icon name="logo-instagram"></ion-icon></a>
-    <a target='blank' class="text-3xl" href="https://twitter.com/?lang=en"><ion-icon name="logo-twitter"></ion-icon></a>
-    <a target='blank' class="text-3xl" href="https://www.pinterest.de/"><ion-icon name="logo-pinterest"></ion-icon></a>
-    <a target='blank' class="text-3xl" href="https://www.facebook.com/"><ion-icon name="logo-facebook"></ion-icon></a>
+    <a target='blank' className="text-3xl" href="https://www.instagram.com/"><ion-icon name="logo-instagram"></ion-icon></a>
+    <a target='blank' className="text-3xl" href="https://twitter.com/?lang=en"><ion-icon name="logo-twitter"></ion-icon></a>
+    <a target='blank' className="text-3xl" href="https://www.pinterest.de/"><ion-icon name="logo-pinterest"></ion-icon></a>
+    <a target='blank' className="text-3xl" href="https://www.facebook.com/"><ion-icon name="logo-facebook"></ion-icon></a>
     </div>
   </nav>
 </footer>

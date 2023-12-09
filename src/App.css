@@ -21,14 +21,6 @@ body {
 .sub-nav {
 padding-left: 20px;
 }
-main {
-    flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-
 .error {
     height: 650px;
     display: flex;
@@ -38,6 +30,23 @@ main {
     gap: 10px;
     padding: 20px;
 }
+.main {
+    flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+    }
+ .products_main {
+    flex-grow: 1;
+    display: flex;
+    /* flex-direction: column; */
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+ }
 
 
 
