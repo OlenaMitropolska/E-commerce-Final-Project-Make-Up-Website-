@@ -30,6 +30,22 @@ export const AppProvider = ({children}) => {
          e.target.searchinput.value = ""
        }
 
+      //  function submitHandler (e) {
+      //    e.preventDefault()
+      //    const value = e.target.searchinput.value
+      //    console.log(value)
+      //    axios.get(`https://makeup-api.herokuapp.com/api/v1/products.json?brand=${value}`)
+      //    .then(response => {
+      //       console.log(response.data);
+      //       setProducts (response.data)})
+      //   .catch(err => console.log(err))
+      //    console.log(products)
+
+      //    navigate("/products")
+
+      //    e.target.searchinput.value = ""
+      //  }
+
 
 
 
