@@ -51,7 +51,7 @@ align-items: center;
     }
  .products_presentation{
     width: 45%;
-    height: 350px;
+    height: 450px;
     display: flex;
     flex-direction: column;
     flex-wrap: nowrap;
@@ -59,13 +59,23 @@ align-items: center;
     align-items: center;
     padding: 10px;
     box-shadow: 0 4px 6px -6px #222;
+    font-size: 14px;
  }
  .products_presentation img {
     height: 50%;
+    object-position: center;
  }
  .products_presentation_content {
 height: 50%;
+display: flex;
+flex-direction: column;
  }
+ .products_presentation_content h2 {
+    font-weight: bold;
+     }
+    .products_presentation_additional {
+align-self: flex-start;
+     }
  .products_presentation button {
    align-self: flex-end;
      }
@@ -95,6 +105,18 @@ height: 50%;
         .input-nav {
           width: 500px;
         }
+        .products_presentation {
+            width: 30%;
+            height: 450px;
+        }
+        .products_presentation_content {
+            gap: 10px;
+            width: 100%;
+        }
+        .products_presentation img {
+            width: 100%;
+            object-fit: contain;
+         }
        
     }
 
@@ -109,5 +131,14 @@ height: 50%;
         .sub-nav{
             display: none;
         }
+         .products_presentation {
+            width: 20%;
+            height: 500px;
+        }
+        .main{
+            width: 90%;
+        }
+      
+  /* main_products where does overflow coming from?, it is not the main div all info is in */
        
     }
