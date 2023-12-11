@@ -2,9 +2,9 @@ import React from 'react'
 
 function Registration() {
   return (
-    <div className='main'>
+    <div className='registerPage'>
 <h2>Create an Account</h2>
-<form action="">
+<form className='registrationForm' action="">
 
 <span className=" label label-text">*Full Name</span>
 <input type="text" className="input input-bordered w-full max-w-xs" />
