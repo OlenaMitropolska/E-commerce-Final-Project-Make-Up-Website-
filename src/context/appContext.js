@@ -16,12 +16,8 @@ export const AppProvider = ({children}) => {
       const navigate = useNavigate()
 
       const [products, setProducts] = useState([])
-      function submitHandler (e) {
-         e.preventDefault() //same as register , do function in component and here just call api 
-         const value = e.target.searchinput.value
-         const category = e.target.searchinput.value
-         console.log(value)
-         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?brand=${value}&product_type=lipstick`)
+      function searchSubmitHandler (value,category) {
+         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?brand=${value}`)
          // https://makeup-api.herokuapp.com/api/v1/products.json?brand=${value}&product_type=${category}
          .then(response => {
             console.log(response.data);
@@ -30,8 +26,6 @@ export const AppProvider = ({children}) => {
          console.log(products)
 
          navigate("/products")
-
-         e.target.searchinput.value = ""
        }
 
       //  function submitHandler (e) {
@@ -51,7 +45,7 @@ export const AppProvider = ({children}) => {
       //  }
 
       function faceProducts () {
-         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?product_type=blush&product_type=foundation`)
+         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?product_type=blush`)
          .then(response => {
             console.log(response.data);
             setProducts (response.data)})
@@ -61,10 +55,10 @@ export const AppProvider = ({children}) => {
          navigate("/products")
       }
 
+      // to many products to call? divide the categories
+
 
    // registration part
-
-   //here create const for name email and password and send to registration 
 
 function RegisterUser(name,email,password) {
    var User = new Backendless.User()
@@ -80,7 +74,7 @@ function RegisterUser(name,email,password) {
    // login part
     
 
-   return <AppContext.Provider value={{dataRetriever, submitHandler, products, faceProducts,RegisterUser}}>
+   return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, faceProducts,RegisterUser}}>
 {children}
    </AppContext.Provider>
 }

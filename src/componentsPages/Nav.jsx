@@ -18,7 +18,6 @@ function Nav() {
         <li><a>Eye Products</a></li>
         <li><a>Lip Products</a></li>
         <li><a>Nail Polishes (NEW!)</a></li>
-
       </ul>
     </div>
     <Link to={"/"}><a className="btn btn-ghost text-xl">ESSENTIALIST</a></Link>
@@ -33,9 +32,18 @@ function Nav() {
     <Link to={'/cart' }><a className="text-2xl"><ion-icon name="bag-outline"></ion-icon></a></Link>
   </div>
 
-
 </div>
 <div className='sub-nav'><SearchInput/></div>
+
+{/* hidden for phone and tablet categories */}
+<div className="navbar-center hidden lg:flex">
+      <ul className="menu menu-horizontal w-full flex justify-center align-center">
+      <li><a>Face Products</a></li>
+        <li><a>Eye Products</a></li>
+        <li><a>Lip Products</a></li>
+        <li><a>Nail Polishes (NEW!)</a></li>
+</ul>
+  </div>
     </div>
   )
 }
