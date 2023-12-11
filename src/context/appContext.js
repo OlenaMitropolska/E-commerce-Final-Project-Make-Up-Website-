@@ -21,11 +21,13 @@ export const AppProvider = ({children}) => {
          // https://makeup-api.herokuapp.com/api/v1/products.json?brand=${value}&product_type=${category}
          .then(response => {
             console.log(response.data);
-            setProducts (response.data)})
-        .catch(err => console.log(err))
+            setProducts (response.data);
+            navigate("/products")})
+        .catch(err => {console.log(err)
+         navigate("/")
+        })
          console.log(products)
 
-         navigate("/products")
        }
 
       //  function submitHandler (e) {

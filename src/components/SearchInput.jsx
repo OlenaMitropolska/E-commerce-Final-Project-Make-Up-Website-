@@ -17,7 +17,7 @@ e.target.searchinput.value = ""
   return (
     <div>
         <form onSubmit={searchHandler} className="flex justify-between input input-bordered input-md w-full max-w-xs search-input-form">
-        <input type="text" id='searchinput' placeholder="What are you looking for?" className='order-none rounded-3xl input-nav'/>
+        <input type="text" name='searchinput' placeholder="What are you looking for?" className='order-none rounded-3xl input-nav'/>
             <button type='submit' className="text-2xl"><ion-icon name="search-outline"></ion-icon></button>
         </form>
     </div>

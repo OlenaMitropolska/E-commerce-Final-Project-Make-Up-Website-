@@ -21,6 +21,11 @@ body {
 .sub-nav {
 padding-left: 20px;
 }
+.input-nav {
+    text-decoration: none;
+    background-color: transparent;
+    width: 300px;
+}
 .error {
     height: 650px;
     display: flex;
@@ -87,12 +92,19 @@ justify-content: center;
 align-items: center;
 gap: 10px;
 }
+.loginForm h2 {
+    font-size: 20px;
+}
 .registerPage {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 10px 0;
+ }
+ .registerPage h2 {
+    font-size: 20px;
+    padding-top: 10px;
  }
 
 

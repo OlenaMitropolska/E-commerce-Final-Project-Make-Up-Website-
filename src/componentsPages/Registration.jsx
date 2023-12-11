@@ -22,11 +22,6 @@ RegisterUser(name,email,password)
 // only works with 2nd submit
 
 
-// function submitHandler (e) {
-// const name = e.target.name.value
-
-// RegisterUser(name,email,pass) //to receive in appContext 
-// }
 
 //context does not see and event, not a component so do function in component and call context just to get the data from there
 //do if logged in then navigate smth like that later
@@ -44,6 +39,15 @@ RegisterUser(name,email,password)
 
 <span className="label label-text">*Password</span>
 <input type="password"className="input input-bordered w-full max-w-xs" name='registerPassword' />
+
+{/* <span className="label label-text">*Date of birth</span>
+<input type="password"className="input input-bordered w-full max-w-xs" name='registerDateofBirth' />
+<span className="label label-text">*City</span>
+<input type="password"className="input input-bordered w-full max-w-xs" name='registerCity' />
+<span className="label label-text">*Address</span>
+<input type="password"className="input input-bordered w-full max-w-xs" name='registerAddress' />
+<span className="label label-text">*Postcode</span>
+<input type="password"className="input input-bordered w-full max-w-xs" name='registerPostcode' /> */}
 
 <button className='btn mt-2.5 px-8' type='submit'>Register</button>
 </form>
