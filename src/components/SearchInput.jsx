@@ -7,10 +7,9 @@ const {searchSubmitHandler} = useAppContext()
 
 function searchHandler (e) {
 e.preventDefault ()
-const value = e.target.searchinput.value
 const category = e.target.searchinput.value
 
-searchSubmitHandler (value, category)
+searchSubmitHandler (category)
 e.target.searchinput.value = ""
   }
 

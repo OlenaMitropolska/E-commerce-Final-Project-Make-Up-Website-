@@ -16,9 +16,9 @@ export const AppProvider = ({children}) => {
       const navigate = useNavigate()
 
       const [products, setProducts] = useState([])
-      function searchSubmitHandler (value,category) {
-         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?brand=${value}`)
-         // https://makeup-api.herokuapp.com/api/v1/products.json?brand=${value}&product_type=${category}
+      function searchSubmitHandler (category) {
+         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?brand=${category}`)
+        
          .then(response => {
             console.log(response.data);
             setProducts (response.data);
@@ -62,11 +62,15 @@ export const AppProvider = ({children}) => {
 
    // registration part
 
-function RegisterUser(name,email,password) {
+function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
    var User = new Backendless.User()
    User.name = name
    User.email = email 
    User.password = password
+   User.DateofBirth = dateBirth
+   User.City = city
+   User.Street = address
+   User.Postcode = postcode
      Backendless.UserService.register(User)
    .then(
      res => console.log(res)
