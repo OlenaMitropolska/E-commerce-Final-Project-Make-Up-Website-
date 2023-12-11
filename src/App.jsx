@@ -11,11 +11,13 @@ import ErrorPage from './componentsPages/ErrorPage';
 import ProductsPage from './componentsPages/ProductsPage';
 import SelectedProduct from './componentsPages/SelectedProduct';
 import Registration from './componentsPages/Registration';
-
-
+import Backendless from 'backendless';
 
 
 function App() {
+
+  Backendless.serverURL = "https://eu-api.backendless.com"
+  Backendless.initApp(process.env.REACT_APP_APP_ID, process.env.REACT_APP_KEY);
  
 
   return (
