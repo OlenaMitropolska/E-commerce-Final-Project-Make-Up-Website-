@@ -23,21 +23,7 @@ function ProductsPage() {
      </div>
      {/* end of products display */}
     
-
-    {/* daisy */}
-    {/* {products && products.map((product, j) => <div key={j} className='products_presentation'>
-    <div className="card w-96 h-{50} bg-base-100 shadow-xl">
-  <figure><img src={product.image_link} alt="Shoes" /></figure>
-  <div className="card-body h-1/2 w-1/2">
-    <h2 className="card-title"> {product.name}</h2>
-    <p>{product.brand}</p>
-    <div className="card-actions justify-end">
-      <button className="btn"><a className="text-2xl"><ion-icon name="bag-outline"></ion-icon></a></button>
-    </div>
-  </div>
-</div>
-</div>)} */}
-{/* end daisy */}
+    
     </div>
   )
 }

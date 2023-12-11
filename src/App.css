@@ -79,6 +79,14 @@ align-self: flex-start;
  .products_presentation button {
    align-self: flex-end;
      }
+.loginForm {
+height: 610px;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+gap: 10px;
+}
 
 
 
@@ -135,9 +143,14 @@ align-self: flex-start;
             width: 20%;
             height: 500px;
         }
-        .main{
-            width: 90%;
+        /* .main {
+            width: 100%;
+            background-color: blue;
         }
+        .main_products {
+            width: 100%;
+            background-color: beige;
+        } */
       
   /* main_products where does overflow coming from?, it is not the main div all info is in */
        

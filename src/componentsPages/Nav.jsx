@@ -1,8 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import SearchInput from '../components/SearchInput'
+import { useAppContext } from '../context/appContext'
 
 function Nav() {
+  const {faceProducts} = useAppContext()
   return (
     <div>
         <div className="navbar bg-base-100">

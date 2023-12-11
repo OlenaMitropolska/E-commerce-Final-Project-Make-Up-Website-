@@ -9,6 +9,8 @@ import Cart from './componentsPages/Cart';
 import Login from './componentsPages/Login';
 import ErrorPage from './componentsPages/ErrorPage';
 import ProductsPage from './componentsPages/ProductsPage';
+import SelectedProduct from './componentsPages/SelectedProduct';
+import Registration from './componentsPages/Registration';
 
 
 
@@ -21,7 +23,7 @@ function App() {
        <Nav />
 
        
-<main>
+{/* <main></main> */}
 
 <Routes>
   <Route path='/' element={<Home />} />
@@ -30,9 +32,11 @@ function App() {
 <Route path='/cart' element={<Cart />} />
 <Route path='/loginpage' element={<Login />} />
 <Route path='/products' element={<ProductsPage />} />
+<Route path='/product' element={<SelectedProduct />} />
+<Route path='/register' element={<Registration />} />
 </Routes>
 
-</main>
+
 
 
 
