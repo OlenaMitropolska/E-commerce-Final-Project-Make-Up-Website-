@@ -2,13 +2,15 @@ import { useAppContext } from '../context/appContext'
 
 
 function ProductsPage() {
-    // const {dataRetriever} = useAppContext()
     const {products} = useAppContext()
+
+    // function selectProduct(e) {
+    //   console.log(e) add as onclick for the div
+    // }
   
   return (
     <div className='main'>
       products page
-        {/* <button className='btn' onClick={dataRetriever}>get info</button> */}
 
         {/* products display */}
         <div className='main_products'>

@@ -5,12 +5,42 @@ import { useAppContext } from '../context/appContext'
 
 function Nav() {
 
-let liList = document.querySelectorAll("li");
- liList.forEach(function(i){
-    i.addEventListener("click", function(e){
-     alert(e.target.innerHTML);
-    })
-  })
+  const {categoriesSearchHandler} = useAppContext()
+
+  const navElements = [
+    {
+      name: "Face Products",
+      items: [
+        "Foundation", "Bronzer", "Blush"
+      ]
+    },
+    {
+      name: "Eye Products",
+      items: [
+        "Eyeliner", "Eyeshadow", "Mascara", "Eyebrow"
+      ]
+    },
+    {
+      name: "Lip Products",
+      items: [
+        "Lip Liner", "Lipstick"
+      ]
+    },
+    {
+      name: "Nail Polishes (NEW!)",
+      items: [
+        "Nail polish"
+      ]
+    }
+  ]
+
+  function categoryHandler (e) {
+    console.log(e.target.textContent)
+    const categorySearch = e.target.textContent
+
+    categoriesSearchHandler (categorySearch)
+  }
+
 
   return (
     <div>
@@ -22,47 +52,26 @@ let liList = document.querySelectorAll("li");
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
       </div>
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-
-         <li>
-          <button>Face Products</button>
-          <ul className="p-2">
-            <li onclick="alert(this.innerText)"><button>Foundation</button></li>
-            <li><button>Bronzer</button></li>
-            <li><button>Blush</button></li>
+        {navElements.map((ele, p) =>
+           <li key={p}>
+           <button>{ele.name}</button>
+           <ul className="p-2">
+            {ele.items.map((cat, j) => <li key={j} ><button onClick={categoryHandler}>{cat}</button></li>)}
           </ul>
-        </li>
-
-        <li>
-          <button>Eye Products</button>
-          <ul className="p-2">
-            <li><button>Mascara</button></li>
-            <li><button>Eye liner</button></li>
-            <li><button>Eye shadow</button></li>
-            <li><button>Eyebrow pencil</button></li>
-          </ul>
-        </li>
-
-        <li>
-          <button>Lip Products</button>
-          <ul className="p-2">
-            <li><button>Lipstick</button></li>
-            <li><button>Lip liner</button></li>
-          </ul>
-        </li>
-
-        <li><button>Nail Polishes (NEW!)</button></li>
+         </li> )}
       </ul>
     </div>
-    <Link to={"/"}><a className="btn btn-ghost text-xl">ESSENTIALIST</a></Link>
+    <Link to={"/"}><button className="btn btn-ghost text-xl">ESSENTIALIST</button></Link>
   </div>
+
  {/* hidden part */}
   <div className="navbar-center hidden lg:flex">
   <div className='search-input'><SearchInput/></div> 
   </div>
   <div className="navbar-end gap-1">
-    <Link to={'/favoritespage'}><a className="text-2xl"><ion-icon name="heart-outline"></ion-icon></a></Link>
-    <Link to={'/loginpage'}><a className="text-2xl"><ion-icon name="person-outline"></ion-icon></a></Link>
-    <Link to={'/cart' }><a className="text-2xl"><ion-icon name="bag-outline"></ion-icon></a></Link>
+    <Link to={'/favoritespage'}><button className="text-2xl"><ion-icon name="heart-outline"></ion-icon></button></Link>
+    <Link to={'/loginpage'}><button className="text-2xl"><ion-icon name="person-outline"></ion-icon></button></Link>
+    <Link to={'/cart' }><button className="text-2xl"><ion-icon name="bag-outline"></ion-icon></button></Link>
   </div>
 
 </div>
@@ -71,42 +80,17 @@ let liList = document.querySelectorAll("li");
 {/* hidden for phone and tablet categories */}
 <div className="navbar-center hidden lg:flex">
       <ul className="menu menu-horizontal w-full flex justify-center align-center">
-    
-      <li>
-          <details close>
-            <summary>Face Products</summary>
-            <ul>
-              <li><button>Foundation</button></li>
-              <li><button>Bronzer</button></li>
-              <li><button>Blush</button></li>
-            </ul>
+      {navElements.map((ele,p) =>
+           <li key={p}>
+            <details close>
+            <summary>{ele.name}</summary>
+           <ul className="p-2">
+            {ele.items.map((cat,j) => <li key={j} ><button onClick={categoryHandler}>{cat}</button></li>)}
+          </ul>
           </details>
-        </li>
+         </li> )}
 
-        <li>
-          <details close>
-            <summary>Eye Products</summary>
-            <ul>
-            <li><button>Mascara</button></li>
-              <li><button>Eye liner</button></li>
-              <li><button>Eyeshadow</button></li>
-              <li><button>Eye pencil</button></li>
-              <li><button>Eyebrow pencil</button></li>
-            </ul>
-          </details>
-        </li>
-
-        <li>
-          <details close>
-            <summary>Lip Products</summary>
-            <ul>
-              <li><button>Lipstick</button></li>
-              <li><button>Lipliner</button></li>
-            </ul>
-          </details>
-        </li>
-      
-        <li><button>Nail Polishes (NEW!)</button></li>
+        
 </ul>
   </div>
     </div>

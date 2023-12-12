@@ -13,22 +13,21 @@ export const AppProvider = ({children}) => {
         .catch(err => console.log(err))
       }
 
+
+      //products main search part
       const navigate = useNavigate()
 
       const [products, setProducts] = useState([])
       function searchSubmitHandler (category) {
-         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?product_type=lipstick`)
-         // http://makeup-api.herokuapp.com/api/v1/products.json?brand=${category}
+         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${category}`)
         
          .then(response => {
-            console.log(response.data);
             setProducts (response.data);
             navigate("/products")})
         .catch(err => {console.log(err)
          navigate("/")
         })
          console.log(products)
-
        }
 
       //  function submitHandler (e) {
@@ -48,17 +47,16 @@ export const AppProvider = ({children}) => {
       //  }
 
 
-      // categoriess for search
+      // categories for search
       function categoriesSearchHandler (categorySearch) {
          axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${categorySearch}`)
          .then(response => {
-          setProducts (response.data)})
+            const data = response.data
+          setProducts (data.slice(0,50))})
         .catch(err => console.log(err))
 
          navigate("/products")
       }
-
-      
 
    // registration part
 
@@ -86,7 +84,7 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
 
     
 
-   return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser}}>
+   return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, categoriesSearchHandler}}>
 {children}
    </AppContext.Provider>
 }
