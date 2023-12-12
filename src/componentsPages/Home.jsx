@@ -7,6 +7,7 @@ const {dataRetriever} = useAppContext()
     <div className='main'>
       <p>Home</p>
       <button className='btn' onClick={dataRetriever}>get info</button>
+    
     </div>
   )
 }

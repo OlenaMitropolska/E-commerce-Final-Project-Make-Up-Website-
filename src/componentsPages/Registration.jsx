@@ -5,15 +5,6 @@ import { useAppContext } from '../context/appContext'
 function Registration() {
   const {RegisterUser}= useAppContext()
 
-  // const [name,setName] =useState("")
-  // const [email,setEmail] =useState("")
-  // const [password,setPassword] = useState("")
-
-  // const [dateBirth, setDateBirth] = useState("")
-  // const [city, setCity] = useState("")
-  // const [address, setAddress] = useState("")
-  // const [postcode, setPostcode] = useState("")
-
 function registrationHandler (e) {
   e.preventDefault()
   const name = e.target.registerName.value
@@ -24,16 +15,8 @@ function registrationHandler (e) {
   const address = e.target.registerAddress.value
   const postcode = e.target.registerPostcode.value
 
-// setName(e.target.registerName.value)
-// setEmail(e.target.registerEmail.value)
-// setPassword(e.target.registerPassword.value)
-
 RegisterUser(name,email,password, dateBirth,city,address, postcode)
 }
-
-// only works with 2nd submit
-
-
 
 //context does not see and event, not a component so do function in component and call context just to get the data from there
 //do if logged in then navigate smth like that later
@@ -54,10 +37,13 @@ RegisterUser(name,email,password, dateBirth,city,address, postcode)
 
 <span className="label label-text">*Date of birth</span>
 <input type="date"className="input input-bordered w-full max-w-xs" name='registerDateofBirth' />
+
 <span className="label label-text">*City</span>
 <input type="text"className="input input-bordered w-full max-w-xs" name='registerCity' />
+
 <span className="label label-text">*Address</span>
 <input type="text"className="input input-bordered w-full max-w-xs" name='registerAddress' />
+
 <span className="label label-text">*Postcode</span>
 <input type="number"className="input input-bordered w-full max-w-xs" name='registerPostcode' />
 

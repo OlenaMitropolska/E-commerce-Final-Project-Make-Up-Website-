@@ -2,16 +2,19 @@ import { useAppContext } from '../context/appContext'
 
 
 function ProductsPage() {
-    const {dataRetriever} = useAppContext()
+    // const {dataRetriever} = useAppContext()
     const {products} = useAppContext()
+  
   return (
-    <div className='main'>ProductsPage
-        <button className='btn' onClick={dataRetriever}>get info</button>
+    <div className='main'>
+      products page
+        {/* <button className='btn' onClick={dataRetriever}>get info</button> */}
 
         {/* products display */}
         <div className='main_products'>
-{products && products.map((product, j) => <div key={j} className='products_presentation'>
-   <img src={product.image_link} alt="" />
+{products && products.slice(0, 50).map((product, j) => <div key={j} className='products_presentation'>
+   <img src={product.image_link} alt=""/> 
+   {/* onError={() => this.img.hide() } onError={this.style.display='none'} */}
 <div className='products_presentation_content'>
 <h2> {product.name}</h2>
    <p>{product.brand}</p>

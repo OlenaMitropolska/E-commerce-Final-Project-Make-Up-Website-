@@ -1,12 +1,22 @@
 import React from 'react'
+import { useAppContext } from '../context/appContext'
 
 function Login() {
+  const {LoginUser} = useAppContext ()
+
+  function loginHandler (e) {
+    e.preventDefault()
+    const loginEmail = e.target.loginEmail.value
+    const loginPassword = e.target.loginPassword.value
+
+    LoginUser (loginEmail,loginPassword )
+  }
   return (
     <div className='main'>
-      <form className='loginForm' action="">
+      <form onSubmit={(e) => loginHandler (e)} className='loginForm' action="">
       <h2>Login</h2>
-      <input type="email" placeholder="Email" className="input input-bordered w-80" />
-      <input type="password" placeholder="Password" className="input input-bordered w-80" />
+      <input name='loginEmail' type="email" placeholder="Email" className="input input-bordered w-80" />
+      <input name='loginPassword' type="password" placeholder="Password" className="input input-bordered w-80" />
       <button className='btn w-48' type='submit'>Login</button>
       </form>
     </div>

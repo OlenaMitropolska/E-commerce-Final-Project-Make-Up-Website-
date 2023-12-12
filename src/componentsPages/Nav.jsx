@@ -4,20 +4,53 @@ import SearchInput from '../components/SearchInput'
 import { useAppContext } from '../context/appContext'
 
 function Nav() {
-  const {faceProducts} = useAppContext()
+
+let liList = document.querySelectorAll("li");
+ liList.forEach(function(i){
+    i.addEventListener("click", function(e){
+     alert(e.target.innerHTML);
+    })
+  })
+
   return (
     <div>
         <div className="navbar bg-base-100">
   <div className="navbar-start">
+    <button></button>
     <div className="dropdown">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
       </div>
       <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-        <li><a>Face Products</a></li>
-        <li><a>Eye Products</a></li>
-        <li><a>Lip Products</a></li>
-        <li><a>Nail Polishes (NEW!)</a></li>
+
+         <li>
+          <button>Face Products</button>
+          <ul className="p-2">
+            <li onclick="alert(this.innerText)"><button>Foundation</button></li>
+            <li><button>Bronzer</button></li>
+            <li><button>Blush</button></li>
+          </ul>
+        </li>
+
+        <li>
+          <button>Eye Products</button>
+          <ul className="p-2">
+            <li><button>Mascara</button></li>
+            <li><button>Eye liner</button></li>
+            <li><button>Eye shadow</button></li>
+            <li><button>Eyebrow pencil</button></li>
+          </ul>
+        </li>
+
+        <li>
+          <button>Lip Products</button>
+          <ul className="p-2">
+            <li><button>Lipstick</button></li>
+            <li><button>Lip liner</button></li>
+          </ul>
+        </li>
+
+        <li><button>Nail Polishes (NEW!)</button></li>
       </ul>
     </div>
     <Link to={"/"}><a className="btn btn-ghost text-xl">ESSENTIALIST</a></Link>
@@ -38,10 +71,42 @@ function Nav() {
 {/* hidden for phone and tablet categories */}
 <div className="navbar-center hidden lg:flex">
       <ul className="menu menu-horizontal w-full flex justify-center align-center">
-      <li><a>Face Products</a></li>
-        <li><a>Eye Products</a></li>
-        <li><a>Lip Products</a></li>
-        <li><a>Nail Polishes (NEW!)</a></li>
+    
+      <li>
+          <details close>
+            <summary>Face Products</summary>
+            <ul>
+              <li><button>Foundation</button></li>
+              <li><button>Bronzer</button></li>
+              <li><button>Blush</button></li>
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          <details close>
+            <summary>Eye Products</summary>
+            <ul>
+            <li><button>Mascara</button></li>
+              <li><button>Eye liner</button></li>
+              <li><button>Eyeshadow</button></li>
+              <li><button>Eye pencil</button></li>
+              <li><button>Eyebrow pencil</button></li>
+            </ul>
+          </details>
+        </li>
+
+        <li>
+          <details close>
+            <summary>Lip Products</summary>
+            <ul>
+              <li><button>Lipstick</button></li>
+              <li><button>Lipliner</button></li>
+            </ul>
+          </details>
+        </li>
+      
+        <li><button>Nail Polishes (NEW!)</button></li>
 </ul>
   </div>
     </div>

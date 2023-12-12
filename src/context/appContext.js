@@ -17,7 +17,8 @@ export const AppProvider = ({children}) => {
 
       const [products, setProducts] = useState([])
       function searchSubmitHandler (category) {
-         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?brand=${category}`)
+         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?product_type=lipstick`)
+         // http://makeup-api.herokuapp.com/api/v1/products.json?brand=${category}
         
          .then(response => {
             console.log(response.data);
@@ -46,19 +47,18 @@ export const AppProvider = ({children}) => {
       //    e.target.searchinput.value = ""
       //  }
 
-      function faceProducts () {
-         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?product_type=blush`)
+
+      // categoriess for search
+      function categoriesSearchHandler (categorySearch) {
+         axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${categorySearch}`)
          .then(response => {
-            console.log(response.data);
-            setProducts (response.data)})
+          setProducts (response.data)})
         .catch(err => console.log(err))
-         console.log(products)
 
          navigate("/products")
       }
 
-      // to many products to call? divide the categories
-
+      
 
    // registration part
 
@@ -78,9 +78,15 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
  }
 
    // login part
+   function LoginUser (loginEmail,loginPassword) {
+      Backendless.UserService.login( loginEmail, loginPassword, true )
+      .then( response => console.log("success"))
+      .catch(err => console.log(err));
+   }
+
     
 
-   return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, faceProducts,RegisterUser}}>
+   return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser}}>
 {children}
    </AppContext.Provider>
 }
