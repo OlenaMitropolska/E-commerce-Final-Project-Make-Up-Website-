@@ -108,7 +108,25 @@ gap: 10px;
     font-size: 20px;
     padding-top: 10px;
  }
-
+.selectedProduct {
+    width: 100%;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: start;
+    gap: 10px;
+}
+.selectedProduct img {
+    align-self: center;
+    margin-bottom: 15px;
+}
+.cartFixed {
+    height: 70px;
+    width: 100%;
+border-top: 1px solid lightgray;
+background-color: white;
+}
 
 
 

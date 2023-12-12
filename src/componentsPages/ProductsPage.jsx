@@ -2,11 +2,8 @@ import { useAppContext } from '../context/appContext'
 
 
 function ProductsPage() {
-    const {products} = useAppContext()
-
-    // function selectProduct() {
-    //   onClick={selectProduct}
-    // }
+    const {products, selectProduct} = useAppContext()
+  
   
   return (
     <div className='main'>
@@ -14,13 +11,8 @@ function ProductsPage() {
 
         {/* products display */}
         <div className='main_products'>
-{products && products.slice(0, 50).map((product, j) => <div key={j} className='products_presentation'>
-   <img src={product.image_link} alt="" onError={(e) => e.target.src = 'https://media.istockphoto.com/id/1038232966/vector/upset-magnifying-glass-vector-illustration.jpg?s=612x612&w=0&k=20&c=cHpDD-xX8wlruAOi-RsTNpaZKtBYtAjP32GpoRGKEmM='}
-     
-    //        onerror= 
-    //  {}
-   /> 
-   {/* onError={() => this.img.hide() } onError={this.style.display='none'} */}
+{products && products.slice(0, 50).map((product, j) => <div onClick={() => selectProduct(product)} key={j} className='products_presentation'>
+   <img src={product.image_link} alt="" onError={(e) => e.target.src = 'https://media.istockphoto.com/id/1038232966/vector/upset-magnifying-glass-vector-illustration.jpg?s=612x612&w=0&k=20&c=cHpDD-xX8wlruAOi-RsTNpaZKtBYtAjP32GpoRGKEmM='}/> 
 <div className='products_presentation_content'>
 <h2> {product.name}</h2>
    <p>{product.brand}</p>
@@ -31,7 +23,6 @@ function ProductsPage() {
      </div>
   )
      }
-     
      </div>
      {/* end of products display */}
     

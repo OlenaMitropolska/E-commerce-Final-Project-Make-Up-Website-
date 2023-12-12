@@ -20,43 +20,14 @@ export const AppProvider = ({children}) => {
       const [products, setProducts] = useState([])
       function searchSubmitHandler (category) {
          axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${category}`)
-        
          .then(response => {
-//             response.filter(obj =>{
-//                var path = obj.image_link
-//                axios.get('path')
-// .then(res=> {return obj})
-// .catch(er=>{
-//    console.log(er);
-//    return null
-// })
-//             } )
             setProducts (response.data);
             navigate("/products")
-            console.log(products)
-         
          })
         .catch(err => {console.log(err)
          navigate("/")
         })
        }
-
-      //  function submitHandler (e) {
-      //    e.preventDefault()
-      //    const value = e.target.searchinput.value
-      //    console.log(value)
-      //    axios.get(`https://makeup-api.herokuapp.com/api/v1/products.json?brand=${value}`)
-      //    .then(response => {
-      //       console.log(response.data);
-      //       setProducts (response.data)})
-      //   .catch(err => console.log(err))
-      //    console.log(products)
-
-      //    navigate("/products")
-
-      //    e.target.searchinput.value = ""
-      //  }
-
 
       // categories for search
       function categoriesSearchHandler (categorySearch) {
@@ -68,6 +39,16 @@ export const AppProvider = ({children}) => {
 
          navigate("/products")
       }
+
+      //selected product part
+      const [selectedProduct, setselectedProduct] = useState()
+      function selectProduct(click) {
+         console.log(click);
+         setselectedProduct(click)
+   
+         navigate("/product")
+       }
+
 
    // registration part
 
@@ -95,7 +76,7 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
 
     
 
-   return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, categoriesSearchHandler}}>
+   return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, categoriesSearchHandler, selectedProduct, selectProduct}}>
 {children}
    </AppContext.Provider>
 }
