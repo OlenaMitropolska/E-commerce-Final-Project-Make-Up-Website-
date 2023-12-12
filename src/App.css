@@ -52,7 +52,6 @@ align-items: center;
    flex-direction: row;
    flex-wrap: wrap;
     gap: 10px;
-
     }
  .products_presentation{
     width: 45%;
@@ -67,7 +66,7 @@ align-items: center;
     font-size: 14px;
  }
  .products_presentation img {
-    height: 50%;
+    height: 400px;
     width: 100%;
     object-position: center;
     object-fit: cover;
@@ -147,6 +146,7 @@ gap: 10px;
         .products_presentation img {
             width: 100%;
             object-fit: contain;
+            height: 50%;
          }
          .registerPage {
            font-size: 2em;

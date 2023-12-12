@@ -1,5 +1,5 @@
 import { createContext, useContext, useState } from "react"
-import axios from 'axios';
+import axios, { Axios } from 'axios';
 import { useNavigate } from "react-router-dom";
 import Backendless from "backendless";
 
@@ -22,12 +22,23 @@ export const AppProvider = ({children}) => {
          axios.get(`http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${category}`)
         
          .then(response => {
+//             response.filter(obj =>{
+//                var path = obj.image_link
+//                axios.get('path')
+// .then(res=> {return obj})
+// .catch(er=>{
+//    console.log(er);
+//    return null
+// })
+//             } )
             setProducts (response.data);
-            navigate("/products")})
+            navigate("/products")
+            console.log(products)
+         
+         })
         .catch(err => {console.log(err)
          navigate("/")
         })
-         console.log(products)
        }
 
       //  function submitHandler (e) {
