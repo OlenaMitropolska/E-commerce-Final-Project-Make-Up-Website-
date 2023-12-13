@@ -127,6 +127,9 @@ gap: 10px;
 border-top: 1px solid lightgray;
 background-color: white;
 }
+.tabletDetails {
+    display: none;
+}
 
 
 
@@ -178,6 +181,58 @@ background-color: white;
            .registerPage {
             flex-grow: 1;
            }
+           .selectedProduct {
+            height: 500px;
+            flex-direction: row;
+            flex-wrap: wrap;
+          position: relative;
+          bottom: 200px;
+           }
+           .productText {
+            width: 45%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            padding-left: 15px;
+            gap: 20px;
+            font-size: 1.5em;
+           }
+           .productText h2 {
+            font-size: 1.5em;
+            font-weight: normal;
+           }
+           .pricep {
+            font-size: 1.5em;
+           }
+           .cartFixed {
+            position: relative;
+          top: 250px;
+         background-color: transparent;
+         border: none;
+         width: 100%;
+           }
+           .cartFixedbtn {
+         margin-left: 15px; 
+            font-size: 1em;
+            height: 70px;
+           }
+           .selectedProduct img {
+            width: 50%;
+            height: 100%;
+           }
+           .collapsehide {
+            display: none;
+           }
+           .tabletDetails {
+            padding-top: 30px;
+            display: flex;
+            gap: 10px;
+            flex-direction: column;
+            font-size: 1.5em;
+        }
+        .tabletDetails h3 {
+            border-bottom: 1px solid gray;
+        }
     }
 
     /* laptop query */
@@ -215,7 +270,23 @@ background-color: white;
             .registerPage h2 {
                padding: 0;
              }
-           
+           .selectedProduct {
+          height: fit-content;
+          bottom: 0;
+         justify-content: center;
+         padding: 30px 15px;
+           }
+           .cartFixed {
+            top: 350px;
+           }
+           .selectedProduct img {
+           height: 600px;
+           width: 45%;
+           }
+           .productText {
+           height: 600px;
+      font-size: 20px;
+           }
        
       
   /* main_products where does overflow coming from?, it is not the main div all info is in */

@@ -49,6 +49,16 @@ export const AppProvider = ({children}) => {
          navigate("/product")
        }
 
+       //selected product price
+       const [selectedProductPrice, setselectedProductPrice] = useState()
+       function price () {
+         if(selectedProduct.price !== "0.0") {
+            setselectedProductPrice(selectedProduct.price);
+         }else {
+            setselectedProductPrice("Out of stock");
+         }
+       }
+
 
    // registration part
 
@@ -76,7 +86,7 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
 
     
 
-   return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, categoriesSearchHandler, selectedProduct, selectProduct}}>
+   return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, categoriesSearchHandler, selectedProduct, selectProduct, price, selectedProductPrice}}>
 {children}
    </AppContext.Provider>
 }
