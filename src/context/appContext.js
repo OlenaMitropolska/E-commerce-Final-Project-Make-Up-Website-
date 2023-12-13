@@ -127,9 +127,16 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
    //check if logged in then to profile page if not to login page
    function LoggedinOrNot () {
     Backendless.UserService.isValidLogin()
-    .then(response => console.log(response) )
+    .then(response => {console.log(response) 
+    if(response == true) {
+      navigate("/profile")
+    }else {
+      navigate("/loginpage")
+    }
+    })
     .catch(error => console.log(error));
    }
+  //  works, but i can still manually go to the profile page
 
     
 
