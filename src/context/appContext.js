@@ -2,8 +2,6 @@ import { createContext, useContext, useState } from "react"
 import axios, { Axios } from 'axios';
 import { useNavigate } from "react-router-dom";
 import Backendless from "backendless";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 const AppContext = createContext()
 
@@ -43,9 +41,9 @@ export const AppProvider = ({children}) => {
       }
 
       //selected product part
-      const [selectedProduct, setselectedProduct] = useState()
+      const [selectedProduct, setselectedProduct] = useState([])
       function selectProduct(click) {
-         setselectedProduct(click)
+         setselectedProduct(i => [...i,click])
          navigate("/product")
        }
 
@@ -60,17 +58,50 @@ export const AppProvider = ({children}) => {
        }
 
        //cart part
+
+      //cart module when item is added
+      const [module, setModule] = useState(false)
+
+       //cart add 
        const [cartProduct, setcartProduct] = useState([])
        function addCart (item) {
-      console.log(item);
-      setcartProduct(i => [...i,item])
-      toast("Item has been added");
-
-      
+           console.log(item);
+          setcartProduct(i => [...i,item])
+          document.getElementById('my_modal_5').showModal()
             // navigate("/cart")
           }
+       
 
-  
+
+      // cart increase quantity
+      function increaseCart(item) {
+         const result = cartProduct.map((i) => {
+           if (i.selectedProduct.id == item.selectedProduct.id) {
+             i.quantity += 1;
+           }
+           return i;
+         });
+     
+         setcartProduct((i) => result);
+       }
+
+
+      
+
+         // if (cartProduct.find((i) => i.selectedProduct.id == item.id)) {
+         //    const result = cartProduct.map((i) => {
+         //      if (i.selectedProduct.id == item.id) {
+         //        i.quantity += 1;
+         //      }
+         //      return i;
+         //    });
+      
+         //    setcartProduct((i) => result);
+         //  } else {
+         //    setcartProduct((i) => [...i, { product: item, quantity: 1 }]);
+         //  }
+
+         
 
 
    // registration part
@@ -100,7 +131,7 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
     
 
    return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, 
-   categoriesSearchHandler, selectedProduct, selectProduct,addCart,cartProduct, price, selectedProductPrice}}>
+   categoriesSearchHandler, selectedProduct, selectProduct,addCart,cartProduct, price,increaseCart, selectedProductPrice}}>
 {children}
    </AppContext.Provider>
 }

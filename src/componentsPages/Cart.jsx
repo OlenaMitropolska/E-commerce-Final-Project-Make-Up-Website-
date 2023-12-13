@@ -4,7 +4,7 @@ import { useAppContext } from '../context/appContext'
 
 
 function Cart() {
-  const {cartProduct} = useAppContext()
+  const {cartProduct, increaseCart} = useAppContext()
 
   return (
     <div className='mainCart'>
@@ -12,7 +12,7 @@ function Cart() {
 <h2 className='uppercase self-start'>Your shopping cart</h2>
       {cartProduct.length > 0 && cartProduct.map (cartP =>
        <div className="productInCart p-4">
- <div className='h-full w-1/4 flex cartProductPhoto'><img src={cartP.image_link} alt="product" /></div>
+ <div className='h-full w-1/4 flex cartProductPhoto'><img src={cartP.image_link} alt="product" onError={(e) => e.target.src = 'https://media.istockphoto.com/id/1038232966/vector/upset-magnifying-glass-vector-illustration.jpg?s=612x612&w=0&k=20&c=cHpDD-xX8wlruAOi-RsTNpaZKtBYtAjP32GpoRGKEmM='} /></div>
  
  <div className="cartProductText h-full w-3/4 pl-4 flex flex-col gap-1.5"> 
  <p className='text-lg'>{cartP.name}</p>
@@ -20,10 +20,12 @@ function Cart() {
  
  <div className="priceCart self-start">
    <button className='border border-solid border-black text-2xl px-3.5 rounded'>-</button>
-   <div className='self-center p-3.5'>1</div>
-   <button className='border border-solid border-black text-2xl px-3.5 rounded'>+</button>
+   <div className='self-center p-3.5'>{cartP.quantity}</div>
+   <button onClick={() => increaseCart(cartP)} className='border border-solid border-black text-2xl px-3.5 rounded'>+</button>
  </div>
- <p>Subtotal: </p>
+ <p>quantity:{" "}</p>
+ <p>{cartP.quantity}</p>
+ <p>Subtotal: {cartP.price} &euro;</p>
  </div>
  </div>
 
@@ -51,11 +53,11 @@ function Cart() {
               <p>{cartP.name} <br /> {cartP.brand}</p>
                 </div>
                 </td> 
-              <td>{cartP.price}</td> 
+              <td>{cartP.price} &euro;</td> 
               <td>
               <div className="priceCart self-start">
               <button className='border border-solid border-black text-2xl px-3.5 rounded'>-</button>
-              <div className='self-center p-3.5'>1</div>
+              <div className='self-center p-3.5'>{cartP.quantity}</div>
               <button className='border border-solid border-black text-2xl px-3.5 rounded'>+</button>
             </div>
                 </td> 

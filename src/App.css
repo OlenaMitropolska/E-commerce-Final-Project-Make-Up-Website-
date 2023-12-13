@@ -358,7 +358,9 @@ background-color: white;
            .mainCart {
             bottom: 0;
            }
-        
+        .mainCart h2 {
+            align-self: center;
+        }
       
   /* main_products where does overflow coming from?, it is not the main div all info is in */
        
