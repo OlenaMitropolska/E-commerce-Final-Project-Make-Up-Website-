@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react"
+import { createContext, useContext, useEffect, useState } from "react"
 import axios, { Axios } from 'axios';
 import { useNavigate } from "react-router-dom";
 import Backendless from "backendless";
@@ -118,10 +118,11 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
    .then(
      res => {console.log(res)
 
-      toast("You have successfully registered"); //how to add the instead of text a div element
+      toast.success("You have successfully registered!", {
+        position: toast.POSITION.TOP_CENTER});  //how to add the instead of text a div element
       navigate("/loginpage")
      }).catch(error => {console.log(error)
-    alert("smth went wrong, please try again!")}) 
+      alert("smth went wrong, please try again!")}) 
  }
 
    // login part
@@ -158,6 +159,19 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
     })
     .catch(err => console.log(err)) 
   }
+//save only 1 users info and display it, save if refreshed!
+  useEffect(() => { if(userInfo != "") {
+    localStorage.setItem('userInfo', JSON.stringify(userInfo)); //i save but not display if refresh
+  }
+}, [userInfo]);
+
+
+  // other comp
+  // if(localStorage.getItem("todos")) { //so it works on other peoples maschines
+//     let saved = localStorage.getItem("todos")
+//     todos = JSON.parse(saved)
+// }
+  
 
 
    return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, 

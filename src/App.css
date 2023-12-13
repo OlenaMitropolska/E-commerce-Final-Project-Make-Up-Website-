@@ -361,6 +361,10 @@ background-color: white;
         .mainCart h2 {
             align-self: center;
         }
+        .profileInfo {
+            justify-content: center;
+            align-items: center;
+        }
       
   /* main_products where does overflow coming from?, it is not the main div all info is in */
        
