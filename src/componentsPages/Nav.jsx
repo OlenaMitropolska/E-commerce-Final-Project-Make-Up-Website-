@@ -88,11 +88,12 @@ function Nav() {
             {ele.items.map((cat,j) => <li key={j} ><button onClick={categoryHandler}>{cat}</button></li>)}
           </ul>
           </details>
-         </li> )}
-
-        
+         </li> )}  
 </ul>
   </div>
+
+
+
     </div>
   )
 }

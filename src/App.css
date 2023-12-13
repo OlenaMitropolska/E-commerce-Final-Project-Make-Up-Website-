@@ -130,7 +130,32 @@ background-color: white;
 .tabletDetails {
     display: none;
 }
-
+.productInCart {
+    height: 200px;
+    width: 100%;
+    display: flex;
+    border-bottom: 1px solid gray;
+}
+.mainCart {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    padding-top: 15px;
+    gap: 15px;
+}
+.productInCart img {
+    height: 80px;
+    width: 60px;
+}
+.priceCart {
+    width: fit-content;
+    height: 40px;
+    display: flex;
+    justify-content: space-around;
+}
+.cartTablet {
+    display: none;
+}
 
 
 
@@ -233,6 +258,49 @@ background-color: white;
         .tabletDetails h3 {
             border-bottom: 1px solid gray;
         }
+        .tabletDetails p {
+            padding: 0 15px;
+           }
+           .mainCart {
+           justify-content: flex-start;
+           align-items: flex-start;
+        }
+        .productInCart {
+            display: none;
+        }
+        .cartTablet {
+            display: block;
+        }
+        .btnCart {
+            width: 40%;
+            align-self: center;
+            font-size: 1.5em;
+        }
+        .totalCart {
+            align-self: center;
+            font-size: 1.5em;
+        }
+        .tabletItemCard {
+            width: 300px;
+            height: 100px;
+            display: flex;
+            gap: 15px;
+        }
+        .tabletItemCard img {
+            height: 100%;
+            width: 30%;
+        }
+        .tabletItemCard  p {
+            height: 100%;
+            width: 70%;
+        }
+        .buyCart {
+            display: none;
+        }
+        .mainCart{
+            flex-grow: 1;
+        }
+       
     }
 
     /* laptop query */
@@ -287,7 +355,10 @@ background-color: white;
            height: 600px;
       font-size: 20px;
            }
-       
+           .mainCart {
+            bottom: 0;
+           }
+        
       
   /* main_products where does overflow coming from?, it is not the main div all info is in */
        

@@ -2,6 +2,8 @@ import { createContext, useContext, useState } from "react"
 import axios, { Axios } from 'axios';
 import { useNavigate } from "react-router-dom";
 import Backendless from "backendless";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const AppContext = createContext()
 
@@ -43,9 +45,7 @@ export const AppProvider = ({children}) => {
       //selected product part
       const [selectedProduct, setselectedProduct] = useState()
       function selectProduct(click) {
-         console.log(click);
          setselectedProduct(click)
-   
          navigate("/product")
        }
 
@@ -58,6 +58,19 @@ export const AppProvider = ({children}) => {
             setselectedProductPrice("Out of stock");
          }
        }
+
+       //cart part
+       const [cartProduct, setcartProduct] = useState([])
+       function addCart (item) {
+      console.log(item);
+      setcartProduct(i => [...i,item])
+      toast("Item has been added");
+
+      
+            // navigate("/cart")
+          }
+
+  
 
 
    // registration part
@@ -86,7 +99,8 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
 
     
 
-   return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, categoriesSearchHandler, selectedProduct, selectProduct, price, selectedProductPrice}}>
+   return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, 
+   categoriesSearchHandler, selectedProduct, selectProduct,addCart,cartProduct, price, selectedProductPrice}}>
 {children}
    </AppContext.Provider>
 }

@@ -1,10 +1,19 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useAppContext } from '../context/appContext'
+import { useNavigate } from 'react-router-dom'
+
 
 function SelectedProduct() {
   const {selectedProduct} = useAppContext()
+  const navigate = useNavigate()
+  // const [cartProduct, setcartProduct] = useState([])
 
+function addCart () {
+  
+  
 
+  navigate("/cart")
+}
 
   return (
     <div className='selectedProduct'>
@@ -14,7 +23,7 @@ function SelectedProduct() {
 <p className='uppercase'>{selectedProduct.brand}</p>  
 <h2 className='font-bold text-xl uppercase'>{selectedProduct.name}</h2>
 <p className='text-red-900 font-bold text-lg pricep'>{selectedProduct.price} &euro;</p>
-<div className='cartFixed fixed bottom-0 left-0 right-0 flex justify-center'><button className="btn self-center w-11/12 bg-zinc-300 cartFixedbtn">Add to cart</button></div>
+<div className='cartFixed fixed bottom-0 left-0 right-0 flex justify-center'><button onClick={() => addCart()} className="btn self-center w-11/12 bg-zinc-300 cartFixedbtn">Add to cart</button></div>
 </div>
 
 
