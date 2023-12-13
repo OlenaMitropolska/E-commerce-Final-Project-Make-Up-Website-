@@ -2,6 +2,9 @@ import { createContext, useContext, useState } from "react"
 import axios, { Axios } from 'axios';
 import { useNavigate } from "react-router-dom";
 import Backendless from "backendless";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 const AppContext = createContext()
 
@@ -113,14 +116,22 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
    User.Postcode = postcode
      Backendless.UserService.register(User)
    .then(
-     res => console.log(res)
-   ).catch(error => console.log(error)) 
+     res => {console.log(res)
+
+      toast("You have successfully registered"); //how to add the instead of text a div element
+      navigate("/loginpage")
+     }).catch(error => {console.log(error)
+    alert("smth went wrong, please try again!")}) 
  }
 
    // login part
    function LoginUser (loginEmail,loginPassword) {
       Backendless.UserService.login( loginEmail, loginPassword, true )
-      .then( response => console.log("success"))
+      .then( response => {console.log("success")
+
+      getProfileInfo ()
+      navigate("/")
+   })
       .catch(err => console.log(err));
    }
 
@@ -138,10 +149,19 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
    }
   //  works, but i can still manually go to the profile page
 
-    
+  // profile page part, basic object retrieval (take info from backend to display to user)
+  const [userInfo, setUserInfo] = useState([])
+  function getProfileInfo () {
+    Backendless.Data.of( "Users" ).find()
+    .then(res => {console.log(res)
+      setUserInfo(res)
+    })
+    .catch(err => console.log(err)) 
+  }
+
 
    return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, 
-   categoriesSearchHandler, selectedProduct, selectProduct,addCart,cartProduct, price,increaseCart, LoggedinOrNot }}>
+   categoriesSearchHandler, selectedProduct, selectProduct,addCart,cartProduct, price,increaseCart, LoggedinOrNot, getProfileInfo,userInfo }}>
 {children}
    </AppContext.Provider>
 }
