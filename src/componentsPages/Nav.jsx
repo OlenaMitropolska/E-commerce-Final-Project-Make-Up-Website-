@@ -5,7 +5,7 @@ import { useAppContext } from '../context/appContext'
 
 function Nav() {
 
-  const {categoriesSearchHandler} = useAppContext()
+  const {categoriesSearchHandler, LoggedinOrNot} = useAppContext()
 
   const navElements = [
     {
@@ -71,6 +71,10 @@ function Nav() {
   <div className="navbar-end gap-1">
     <Link to={'/favoritespage'}><button className="text-2xl"><ion-icon name="heart-outline"></ion-icon></button></Link>
     <Link to={'/loginpage'}><button className="text-2xl"><ion-icon name="person-outline"></ion-icon></button></Link>
+
+    {/* change to navigate like if logged in navigate to profile page, if not navigate to login */}
+    <button onClick={LoggedinOrNot} className="text-2xl"><ion-icon name="bug-outline"></ion-icon></button>
+    
     <Link to={'/cart' }><button className="text-2xl"><ion-icon name="bag-outline"></ion-icon></button></Link>
   </div>
 

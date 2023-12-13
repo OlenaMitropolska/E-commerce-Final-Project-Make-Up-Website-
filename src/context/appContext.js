@@ -58,10 +58,6 @@ export const AppProvider = ({children}) => {
        }
 
        //cart part
-
-      //cart module when item is added
-      const [module, setModule] = useState(false)
-
        //cart add 
        const [cartProduct, setcartProduct] = useState([])
        function addCart (item) {
@@ -128,10 +124,17 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
       .catch(err => console.log(err));
    }
 
+   //check if logged in then to profile page if not to login page
+   function LoggedinOrNot () {
+    Backendless.UserService.isValidLogin()
+    .then(response => console.log(response) )
+    .catch(error => console.log(error));
+   }
+
     
 
    return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, 
-   categoriesSearchHandler, selectedProduct, selectProduct,addCart,cartProduct, price,increaseCart, selectedProductPrice}}>
+   categoriesSearchHandler, selectedProduct, selectProduct,addCart,cartProduct, price,increaseCart, LoggedinOrNot }}>
 {children}
    </AppContext.Provider>
 }

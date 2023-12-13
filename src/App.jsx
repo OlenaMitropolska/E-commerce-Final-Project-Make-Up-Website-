@@ -12,6 +12,7 @@ import ProductsPage from './componentsPages/ProductsPage';
 import SelectedProduct from './componentsPages/SelectedProduct';
 import Registration from './componentsPages/Registration';
 import Backendless from 'backendless';
+import Profile from './componentsPages/Profile';
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
 <Route path='/products' element={<ProductsPage />} />
 <Route path='/product' element={<SelectedProduct />} />
 <Route path='/register' element={<Registration />} />
+<Route path="/profile" element={<Profile />} />
 </Routes>
 
 

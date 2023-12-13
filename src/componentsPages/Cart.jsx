@@ -20,7 +20,7 @@ function Cart() {
  
  <div className="priceCart self-start">
    <button className='border border-solid border-black text-2xl px-3.5 rounded'>-</button>
-   <div className='self-center p-3.5'>{cartP.quantity}</div>
+   <div className='self-center p-3.5'>1</div>
    <button onClick={() => increaseCart(cartP)} className='border border-solid border-black text-2xl px-3.5 rounded'>+</button>
  </div>
  <p>quantity:{" "}</p>
