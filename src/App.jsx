@@ -15,6 +15,7 @@ import Backendless from 'backendless';
 import Profile from './componentsPages/Profile';
 import Purchase from './componentsPages/Purchase';
 import EmptyCart from './componentsPages/EmptyCart';
+import ThankYou from './componentsPages/ThankYou';
 
 
 function App() {
@@ -41,7 +42,8 @@ function App() {
 <Route path='/register' element={<Registration />} />
 <Route path="/profile" element={<Profile />} />
 <Route path='/purchase' element={<Purchase />} />
-<Route path='/emptycart"' element={<EmptyCart />} />
+<Route path='/emptycart' element={<EmptyCart />} />
+<Route path='/thankyou' element={<ThankYou />} />
 </Routes>
 
 {/* <Route path="/profile" element={<Profile />} /> <Route path='/favoritespage' element={<FavoritesPage/>} /> */}

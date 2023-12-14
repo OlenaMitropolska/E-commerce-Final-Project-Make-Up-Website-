@@ -1,5 +1,6 @@
 import React, { useEffect} from 'react'
 import { useAppContext } from '../context/appContext'
+import { Link } from 'react-router-dom'
 
 
 
@@ -76,7 +77,7 @@ function Cart() {
 {/* end */}
 
 <p className='totalCart text-lg'> Total: {cartProduct.reduce((acc, cur) => (acc += cur.quantity * Number(cur.price)),0).toFixed(2)} &euro;</p>
-<button className='btn w-full btnCart'>Purchase</button>
+<Link to={"/purchase"}><button className='btn w-full btnCart'>Purchase</button></Link>
 
    
 

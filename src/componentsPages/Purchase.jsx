@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 function Purchase() {
   return (
@@ -23,7 +24,7 @@ function Purchase() {
 
     </tbody>
   </table>
-  <div className='flex justify-center align-center p-4'><button className='btn self-center'>Purchase</button> </div>
+  <div className='flex justify-center align-center p-4'><Link to={"/thankyou"}><button className='btn self-center'>Purchase</button></Link> </div>
   </div>
 </div>
 
