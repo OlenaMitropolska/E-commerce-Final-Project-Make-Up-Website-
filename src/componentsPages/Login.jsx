@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppContext } from '../context/appContext'
 import { Link } from 'react-router-dom'
 
 function Login() {
-  const {LoginUser} = useAppContext ()
+  const {LoginUser, LoggedinOrNot} = useAppContext ()
+  useEffect(() => {
+    LoggedinOrNot ()
+  }, [])
 
   function loginHandler (e) {
     e.preventDefault()

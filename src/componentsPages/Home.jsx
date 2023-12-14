@@ -1,12 +1,15 @@
 import { useAppContext } from '../context/appContext'
 
 function Home() {
-const {dataRetriever} = useAppContext()
+const {brands} = useAppContext()
 
   return (
     <div className='main'>
       <p>Home</p>
-      <button className='btn' onClick={dataRetriever}>get info</button>
+     {brands && brands.map (brand => 
+      <div>{brand.brand}</div>
+      )}
+
     
     </div>
   )

@@ -16,6 +16,16 @@ export const AppProvider = ({children}) => {
         .catch(err => console.log(err))
       }
 
+      //home page part -- do the map of brands if clicked on one, go to all products from this brand here with function works only if we click or smth, do otherwise
+const [brands, setBrands] = useState([])
+function displayBrands () {
+  axios.get("https://makeup-api.herokuapp.com/api/v1/products.json")
+        .then (response => {console.log(response.data)
+          setBrands (response.data)
+        })
+        .catch(err => console.log(err))
+}
+
 
       //products main search part
       const navigate = useNavigate()
@@ -43,6 +53,16 @@ export const AppProvider = ({children}) => {
          navigate("/products")
       }
 
+          //selected product price
+      //  const [selectedProductPrice, setselectedProductPrice] = useState()
+      //  function price () {
+      //    if(selectedProduct.price !== "0.0") {
+      //       setselectedProductPrice(selectedProduct.price);
+      //    }else {
+      //       setselectedProductPrice("Out of stock");
+      //    }
+      //  }
+
       //selected product part
       const [selectedProduct, setselectedProduct] = useState([])
       function selectProduct(click) {
@@ -50,56 +70,49 @@ export const AppProvider = ({children}) => {
          navigate("/product")
        }
 
-       //selected product price
-       const [selectedProductPrice, setselectedProductPrice] = useState()
-       function price () {
-         if(selectedProduct.price !== "0.0") {
-            setselectedProductPrice(selectedProduct.price);
-         }else {
-            setselectedProductPrice("Out of stock");
-         }
-       }
-
        //cart part
        //cart add 
        const [cartProduct, setcartProduct] = useState([])
        function addCart (item) {
-           console.log(item);
-          setcartProduct(i => [...i,item])
-          document.getElementById('my_modal_5').showModal()
-            // navigate("/cart")
+        console.log(item);
+        console.log(selectedProduct[0].id);
+         if (cartProduct.find((i) => i.selectedProduct.id == item.id)) {
+            const addP = cartProduct.map((i) => {
+              if (i.selectedProduct.id == item.id) {
+                i.quantity += 1;
+                document.getElementById('my_modal_5').showModal()
+              }
+              return i;
+            });
+            setcartProduct((i) => [addP]);
+          } else {
+            setcartProduct((i) => [...i, { product: item, quantity: 1 }]);
+            document.getElementById('my_modal_5').showModal()
           }
+        }
+
+          // console.log(item);
+          // setcartProduct(i => [...i,item])
+// document.getElementById('my_modal_5').showModal()
+        
        
 
 
-      // cart increase quantity
-      function increaseCart(item) {
-         const result = cartProduct.map((i) => {
-           if (i.selectedProduct.id == item.selectedProduct.id) {
-             i.quantity += 1;
-           }
-           return i;
-         });
+
      
-         setcartProduct((i) => result);
-       }
 
 
-      
-
-         // if (cartProduct.find((i) => i.selectedProduct.id == item.id)) {
-         //    const result = cartProduct.map((i) => {
-         //      if (i.selectedProduct.id == item.id) {
-         //        i.quantity += 1;
-         //      }
-         //      return i;
-         //    });
-      
-         //    setcartProduct((i) => result);
-         //  } else {
-         //    setcartProduct((i) => [...i, { product: item, quantity: 1 }]);
-         //  }
-
+             // cart increase quantity
+      // function increaseCart(item) {
+      //    const incC = cartProduct.map((i) => {
+      //      if (i.selectedProduct.id == item.selectedProduct.id) {
+      //        i.quantity += 1;
+      //      }
+      //      return i;
+      //    });
+     
+      //    setcartProduct((i) => incC);
+      //  }
          
 
 
@@ -119,7 +132,7 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
      res => {console.log(res)
 
       toast.success("You have successfully registered!", {
-        position: toast.POSITION.TOP_CENTER});  //how to add the instead of text a div element
+        position: toast.POSITION.TOP_CENTER});  //add the instead of text a div element
       navigate("/loginpage")
      }).catch(error => {console.log(error)
       alert("smth went wrong, please try again!")}) 
@@ -137,6 +150,7 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
    }
 
    //check if logged in then to profile page if not to login page
+   
    function LoggedinOrNot () {
     Backendless.UserService.isValidLogin()
     .then(response => {console.log(response) 
@@ -148,34 +162,23 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
     })
     .catch(error => console.log(error));
    }
-  //  works, but i can still manually go to the profile page
 
-  // profile page part, basic object retrieval (take info from backend to display to user)
-  const [userInfo, setUserInfo] = useState([])
+  // profile page part
+  const [userInfo, setUserInfo] = useState()
   function getProfileInfo () {
-    Backendless.Data.of( "Users" ).find()
-    .then(res => {console.log(res)
+    Backendless.UserService.getCurrentUser()
+    .then(res => {
+      console.log(res)
       setUserInfo(res)
     })
-    .catch(err => console.log(err)) 
-  }
-//save only 1 users info and display it, save if refreshed!
-  useEffect(() => { if(userInfo != "") {
-    localStorage.setItem('userInfo', JSON.stringify(userInfo)); //i save but not display if refresh
-  }
-}, [userInfo]);
+    .catch(error => {
+      console.error(error)
+    })}
 
-
-  // other comp
-  // if(localStorage.getItem("todos")) { //so it works on other peoples maschines
-//     let saved = localStorage.getItem("todos")
-//     todos = JSON.parse(saved)
-// }
-  
 
 
    return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, 
-   categoriesSearchHandler, selectedProduct, selectProduct,addCart,cartProduct, price,increaseCart, LoggedinOrNot, getProfileInfo,userInfo }}>
+   categoriesSearchHandler,brands, selectedProduct, selectProduct,addCart,cartProduct, LoggedinOrNot, getProfileInfo,userInfo }}>
 {children}
    </AppContext.Provider>
 }

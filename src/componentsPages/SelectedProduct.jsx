@@ -9,7 +9,6 @@ function SelectedProduct() {
     <div className='selectedProduct'>
       {selectedProduct && selectedProduct.map(selectedP => 
 <>
-
 <img src={selectedP.image_link} onError={(e) => e.target.src = 'https://media.istockphoto.com/id/1038232966/vector/upset-magnifying-glass-vector-illustration.jpg?s=612x612&w=0&k=20&c=cHpDD-xX8wlruAOi-RsTNpaZKtBYtAjP32GpoRGKEmM='} alt="photo" />
 <div className='productText'>
 <p className='uppercase'>{selectedP.brand}</p>  

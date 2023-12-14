@@ -4,7 +4,7 @@ import { useAppContext } from '../context/appContext'
 
 
 function Cart() {
-  const {cartProduct, increaseCart} = useAppContext()
+  const {cartProduct, } = useAppContext()
 
   return (
     <div className='mainCart'>
@@ -21,7 +21,8 @@ function Cart() {
  <div className="priceCart self-start">
    <button className='border border-solid border-black text-2xl px-3.5 rounded'>-</button>
    <div className='self-center p-3.5'>1</div>
-   <button onClick={() => increaseCart(cartP)} className='border border-solid border-black text-2xl px-3.5 rounded'>+</button>
+   <button  className='border border-solid border-black text-2xl px-3.5 rounded'>+</button>
+   {/* onClick={() => increaseCart(cartP)}  increaseCart*/}
  </div>
  <p>quantity:{" "}</p>
  <p>{cartP.quantity}</p>
