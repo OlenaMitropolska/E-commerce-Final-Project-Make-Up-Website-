@@ -5,7 +5,7 @@ import { useAppContext } from '../context/appContext'
 
 function Nav() {
 
-  const {categoriesSearchHandler, LoggedinOrNot} = useAppContext()
+  const {categoriesSearchHandler, LoggedinOrNot, saveCart} = useAppContext()
 
   const navElements = [
     {
@@ -64,7 +64,7 @@ function Nav() {
     <Link to={"/"}><button className="btn btn-ghost text-xl">ESSENTIALIST</button></Link>
   </div>
 
- {/* hidden part */}
+ {/* hidden part*/}
   <div className="navbar-center hidden lg:flex">
   <div className='search-input'><SearchInput/></div> 
   </div>
@@ -73,7 +73,7 @@ function Nav() {
    
     <button onClick={LoggedinOrNot} className="text-2xl"><ion-icon name="person-outline"></ion-icon></button>
     
-    <Link to={'/cart' }><button className="text-2xl"><ion-icon name="bag-outline"></ion-icon></button></Link>
+    <Link to={'/cart' }><button onClick={saveCart} className="text-2xl"><ion-icon name="bag-outline"></ion-icon></button></Link>
   </div>
 
 </div>

@@ -3,7 +3,7 @@ import { useAppContext } from '../context/appContext'
 
 function ProductsPage() {
 
-    const {products, selectProduct,addCart} = useAppContext()
+    const {products, selectProduct,addCart, saveCart} = useAppContext()
 
 
   
@@ -40,7 +40,7 @@ function ProductsPage() {
         {/* to close the modal */}
         <button className="btn">Continue Shopping</button>
       </form>
-      <Link to={"/cart"} className='btn'><button className="btn px-8">Go to Cart</button></Link> 
+      <Link to={"/cart"} onClick={saveCart} className='btn'><button className="btn px-8">Go to Cart</button></Link> 
     </div>
   </div>
 </dialog>

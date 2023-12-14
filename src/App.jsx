@@ -13,6 +13,7 @@ import SelectedProduct from './componentsPages/SelectedProduct';
 import Registration from './componentsPages/Registration';
 import Backendless from 'backendless';
 import Profile from './componentsPages/Profile';
+import Purchase from './componentsPages/Purchase';
 
 
 function App() {
@@ -38,6 +39,7 @@ function App() {
 <Route path='/product' element={<SelectedProduct />} />
 <Route path='/register' element={<Registration />} />
 <Route path="/profile" element={<Profile />} />
+<Route path='/purchase' element={<Purchase />} />
 </Routes>
 
 {/* <Route path="/profile" element={<Profile />} /> <Route path='/favoritespage' element={<FavoritesPage/>} /> */}

@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useAppContext } from '../context/appContext'
 
 
 
 function Cart() {
-  const {cartProduct, } = useAppContext()
+  const {cartProduct, increaseCart,decreaseCart,getCartInfo} = useAppContext()
+  useEffect(() => {
+    getCartInfo () 
+  }, [])
 
   return (
     <div className='mainCart'>
+      {/* <button className='btn' onClick={saveCart }>save cart </button> */}
       
 <h2 className='uppercase self-start'>Your shopping cart</h2>
       {cartProduct.length > 0 && cartProduct.map (cartP =>
@@ -19,14 +23,13 @@ function Cart() {
  <p>{cartP.brand}</p>
  
  <div className="priceCart self-start">
-   <button className='border border-solid border-black text-2xl px-3.5 rounded'>-</button>
-   <div className='self-center p-3.5'>1</div>
-   <button  className='border border-solid border-black text-2xl px-3.5 rounded'>+</button>
-   {/* onClick={() => increaseCart(cartP)}  increaseCart*/}
+   <button onClick={() => decreaseCart(cartP)} className='border border-solid border-black text-2xl px-3.5 rounded'>-</button>
+   <div className='self-center p-3.5'>{cartP.quantity}</div>
+   <button onClick={() => increaseCart(cartP)} className='border border-solid border-black text-2xl px-3.5 rounded'>+</button>
+
  </div>
- <p>quantity:{" "}</p>
- <p>{cartP.quantity}</p>
- <p>Subtotal: {cartP.price} &euro;</p>
+
+ <p className='text-lg'>Subtotal: {cartProduct.reduce((acc, cur) => (acc += cur.quantity * Number(cur.price)),0).toFixed(2)} &euro;</p>
  </div>
  </div>
 
@@ -54,15 +57,15 @@ function Cart() {
               <p>{cartP.name} <br /> {cartP.brand}</p>
                 </div>
                 </td> 
-              <td>{cartP.price} &euro;</td> 
+              <td>{cartP.price}0 &euro;</td> 
               <td>
               <div className="priceCart self-start">
-              <button className='border border-solid border-black text-2xl px-3.5 rounded'>-</button>
+              <button onClick={() => decreaseCart(cartP)} className='border border-solid border-black text-2xl px-3.5 rounded'>-</button>
               <div className='self-center p-3.5'>{cartP.quantity}</div>
-              <button className='border border-solid border-black text-2xl px-3.5 rounded'>+</button>
+              <button onClick={() => increaseCart(cartP)} className='border border-solid border-black text-2xl px-3.5 rounded'>+</button>
             </div>
                 </td> 
-              <td>Price for items</td> 
+              <td>{cartProduct.reduce((acc, cur) => (acc += cur.quantity * Number(cur.price)),0).toFixed(2)} &euro;</td> 
             </tr>
           </tbody> 
         </table>
@@ -71,7 +74,7 @@ function Cart() {
 </div>
 {/* end */}
 
-<p className='totalCart'>Total: </p>
+<p className='totalCart'> Total Money : {cartProduct.reduce((acc, cur) => (acc += cur.quantity * Number(cur.price)),0).toFixed(2)}</p>
 <button className='btn w-full btnCart'>Purchase</button>
 
    
