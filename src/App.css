@@ -175,6 +175,12 @@ background-color: white;
 .profileMainBtn button {
     width: 200px;
 }
+.purchaseMain {
+    width: 100%;
+    padding-top: 30px;
+    height: 300px;
+
+}
 
 
 
@@ -336,6 +342,17 @@ background-color: white;
         .profileMainBtn button {
             width: 200px;
         }
+        .purchaseMain {
+        padding-top: 0;
+     position: relative;
+     bottom: 100%;
+        }
+        .purchaseMain td {
+            font-size: 25px;
+        }
+        .purchaseMain button {
+            font-size: 25px;
+        }
        
     }
 
@@ -404,7 +421,18 @@ background-color: white;
             justify-content: center;
             align-items: center;
         }
-      
-  /* main_products where does overflow coming from?, it is not the main div all info is in */
+        .purchaseMain {
+      bottom: 0;
+            }
+            .purchaseMain td {
+                font-size: 25px;
+            }
+            .purchaseMain button {
+                font-size: 25px;
+                height: fit-content;
+                width: fit-content;
+                padding: 20px 40px;
+            }
+
        
     }

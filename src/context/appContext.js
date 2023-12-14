@@ -9,12 +9,12 @@ const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
   // api part
-  function dataRetriever() {
-    axios
-      .get("https://makeup-api.herokuapp.com/api/v1/products.json")
-      .then((response) => console.log(response.data))
-      .catch((err) => console.log(err));
-  }
+  // function dataRetriever() {
+  //   axios
+  //     .get("https://makeup-api.herokuapp.com/api/v1/products.json")
+  //     .then((response) => console.log(response.data))
+  //     .catch((err) => console.log(err));
+  // }
 
   //home page part -- do the map of brands if clicked on one, go to all products from this brand here with function works only if we click or smth, do otherwise
   const [brands, setBrands] = useState([]);
@@ -99,8 +99,6 @@ export const AppProvider = ({ children }) => {
   //cart add
   const [cartProduct, setcartProduct] = useState([]);
   function addCart(item) {
-    console.log(item);
-
     const obj = { ...item, quantity: 1 };
     const res = cartProduct.find((i) => i.id == item.id);
     if (res) {
@@ -115,7 +113,15 @@ export const AppProvider = ({ children }) => {
       setcartProduct((arr) => [...arr, obj]);
       document.getElementById("my_modal_5").showModal();
     }
-    console.log(cartProduct);
+  }
+
+  //cart page empty or not check
+  function isCartEmpty () {
+    if (cartProduct.length < 1) {
+      navigate("/emptycart")
+    }else {
+      navigate("/cart")
+    }
   }
 
   // cart increase quantity
@@ -148,7 +154,7 @@ export const AppProvider = ({ children }) => {
       removeFromCart(item);
     }
   }
-  //remove from cart (not send, executed in decrease function)
+  //remove from cart
   function removeFromCart(item) {
     const result = cartProduct.filter((i) => i.id != item.id);
     setcartProduct((i) => result);
@@ -156,16 +162,19 @@ export const AppProvider = ({ children }) => {
 
   //save cart in backendless: 1 cart per person, update if it is changed
   const sa = cartProduct.map((i) => i.id);
-  console.log(sa);
+  // console.log(sa);
   const savedCart = {
     productID: sa,
   };
   function saveCart() {
-    Backendless.Data.of("Cart")
-      .save(savedCart, true)
-      .then((response) => console.log("all saved"))
-      .catch((err) => console.log(err));
+  Backendless.Data.of( "Cart" ).save(savedCart)
+  .then( response => console.log("all saved"))
+  .catch(err => console.log(err))
   }
+  // Backendless.Data.of("Cart")
+  // .save(savedCart, true)
+  // .then((response) => console.log("all saved"))
+  // .catch((err) => console.log(err));
 
   // Backendless.Data.of( "Cart" ).save(savedCart)
   // .then( response => console.log("all saved"))
@@ -180,15 +189,16 @@ export const AppProvider = ({ children }) => {
       .find()
       .then((res) => {
         console.log(res);
-        setCartInfo(res);
+        setCartInfo(res.data);
+        console.log(cartInfo);
       })
       .catch((error) => {
         console.error(error);
       });
   }
 
-  // registration part
 
+  // registration part
   function RegisterUser(
     name,
     email,
@@ -208,7 +218,7 @@ export const AppProvider = ({ children }) => {
     User.Postcode = postcode;
     Backendless.UserService.register(User)
       .then((res) => {
-        console.log(res);
+        // console.log(res);
 
         toast.success("You have successfully registered!", {
           position: toast.POSITION.TOP_CENTER,
@@ -216,7 +226,7 @@ export const AppProvider = ({ children }) => {
         navigate("/loginpage");
       })
       .catch((error) => {
-        console.log(error);
+        // console.log(error);
         alert("smth went wrong, please try again!");
       });
   }
@@ -225,7 +235,7 @@ export const AppProvider = ({ children }) => {
   function LoginUser(loginEmail, loginPassword) {
     Backendless.UserService.login(loginEmail, loginPassword, true)
       .then((response) => {
-        console.log("success");
+        // console.log("success");
 
         getProfileInfo();
         navigate("/");
@@ -240,7 +250,7 @@ export const AppProvider = ({ children }) => {
   function LoggedinOrNot() {
     Backendless.UserService.isValidLogin()
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response == true) {
           navigate("/profile");
         } else {
@@ -255,7 +265,7 @@ export const AppProvider = ({ children }) => {
   function LoggedinOrNotReg() {
     Backendless.UserService.isValidLogin()
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response == true) {
           navigate("/profile");
         } else {
@@ -269,7 +279,7 @@ export const AppProvider = ({ children }) => {
   function LoggedinOrNotFavPage() {
     Backendless.UserService.isValidLogin()
       .then((response) => {
-        console.log(response);
+        // console.log(response);
         if (response == true) {
           navigate("/favoritespage");
         } else {
@@ -284,7 +294,7 @@ export const AppProvider = ({ children }) => {
   function getProfileInfo() {
     Backendless.UserService.getCurrentUser()
       .then((res) => {
-        console.log(res);
+        // console.log(res);
         setUserInfo(res);
       })
       .catch((error) => {
@@ -304,7 +314,6 @@ export const AppProvider = ({ children }) => {
   return (
     <AppContext.Provider
       value={{
-        dataRetriever,
         searchSubmitHandler,
         products,
         RegisterUser,
@@ -325,7 +334,9 @@ export const AppProvider = ({ children }) => {
         LoggedinOrNotReg,
         logout,
         brands,
-        displayBrands
+        displayBrands,
+        removeFromCart,
+        isCartEmpty
       }}
     >
       {children}

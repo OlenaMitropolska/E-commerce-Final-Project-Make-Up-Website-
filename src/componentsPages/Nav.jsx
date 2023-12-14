@@ -5,7 +5,7 @@ import { useAppContext } from '../context/appContext'
 
 function Nav() {
 
-  const {categoriesSearchHandler, LoggedinOrNot, saveCart} = useAppContext()
+  const {categoriesSearchHandler, LoggedinOrNot, saveCart,isCartEmpty} = useAppContext()
 
   const navElements = [
     {
@@ -72,7 +72,10 @@ function Nav() {
     <Link to={'/favoritespage'}><button className="text-2xl"><ion-icon name="heart-outline"></ion-icon></button></Link>
    
     <button onClick={LoggedinOrNot} className="text-2xl"><ion-icon name="person-outline"></ion-icon></button>
-    
+
+    {/* <button onClick={isCartEmpty} className="text-2xl"><ion-icon name="bag-outline"></ion-icon></button> */}
+    {/* works but check if we need saveCart for backendless or not */}
+   
     <Link to={'/cart' }><button onClick={saveCart} className="text-2xl"><ion-icon name="bag-outline"></ion-icon></button></Link>
   </div>
 

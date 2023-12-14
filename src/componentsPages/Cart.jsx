@@ -4,13 +4,14 @@ import { useAppContext } from '../context/appContext'
 
 
 function Cart() {
-  const {cartProduct, increaseCart,decreaseCart,getCartInfo} = useAppContext()
+  const {cartProduct, increaseCart,decreaseCart,getCartInfo,removeFromCart} = useAppContext()
   useEffect(() => {
-    getCartInfo () 
+    // getCartInfo () 
   }, [])
 
   return (
     <div className='mainCart'>
+      <button onClick={getCartInfo} className='btn'>get Cart Info</button>
       {/* <button className='btn' onClick={saveCart }>save cart </button> */}
       
 <h2 className='uppercase self-start'>Your shopping cart</h2>
@@ -30,6 +31,7 @@ function Cart() {
  </div>
 
  <p className='text-lg'>Price pro item: {cartP.price}0 &euro;</p>
+ <p onClick={() => removeFromCart(cartP)} className='underline'>X Remove</p>
  </div>
  </div>
 

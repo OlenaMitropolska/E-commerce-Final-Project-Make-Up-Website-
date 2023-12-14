@@ -2,30 +2,32 @@ import React from 'react'
 
 function Purchase() {
   return (
-    <div>
-        <div className="overflow-x-auto p-3">
-        <h2 className='text-2xl uppercase self-start'>Purchase Method</h2>
+    <div className="">
+
+
+        <div className="overflow-x-auto p-3 purchaseMain">
+        <h2 className='text-2xl uppercase self-start mb-2'>Purchase Method</h2>
   <table className="table">
     
     <tbody>
-      {/* row 1 */}
+      
       <tr>
-        <td>Cy Ganderton</td>
+        <td><input type="checkbox" className="checkbox" /></td>
+        <td>Paypal</td>
       </tr>
-      {/* row 2 */}
+      
       <tr>
-        <td>Hart Hagerty</td>
+      <td><input type="checkbox" className="checkbox" /></td>
+        <td>Credit Card</td>
       </tr>
-      {/* row 3 */}
-      <tr>
-        <td>Brice Swyre</td>
-        <td>Tax Accountant</td>
-      </tr>
+
     </tbody>
   </table>
+  <div className='flex justify-center align-center p-4'><button className='btn self-center'>Purchase</button> </div>
+  </div>
 </div>
 
-    </div>
+
   )
 }
 
