@@ -5,10 +5,10 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 function Registration() {
-  const {RegisterUser,LoggedinOrNot}= useAppContext()
+  const {RegisterUser,LoggedinOrNotReg}= useAppContext()
 
   useEffect(() => {
-    LoggedinOrNot ()
+    LoggedinOrNotReg ()
   }, [])
 
 function registrationHandler (e) {

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect} from 'react'
 import { useAppContext } from '../context/appContext'
 
 
@@ -29,13 +29,12 @@ function Cart() {
 
  </div>
 
- <p className='text-lg'>Subtotal: {cartProduct.reduce((acc, cur) => (acc += cur.quantity * Number(cur.price)),0).toFixed(2)} &euro;</p>
+ <p className='text-lg'>Price pro item: {cartP.price}0 &euro;</p>
  </div>
  </div>
+
 
       )}
-
-
 
        {/* tablet version */}
        <div className='cartTablet w-full'>
@@ -74,7 +73,7 @@ function Cart() {
 </div>
 {/* end */}
 
-<p className='totalCart'> Total Money : {cartProduct.reduce((acc, cur) => (acc += cur.quantity * Number(cur.price)),0).toFixed(2)}</p>
+<p className='totalCart text-lg'> Total: {cartProduct.reduce((acc, cur) => (acc += cur.quantity * Number(cur.price)),0).toFixed(2)} &euro;</p>
 <button className='btn w-full btnCart'>Purchase</button>
 
    

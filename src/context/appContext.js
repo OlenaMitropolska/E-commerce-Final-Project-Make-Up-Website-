@@ -22,11 +22,26 @@ export const AppProvider = ({ children }) => {
     axios
       .get("https://makeup-api.herokuapp.com/api/v1/products.json")
       .then((response) => {
-        console.log(response.data);
-        setBrands(response.data);
+        const data = response.data
+        const uK = [...new Set(data.map(q => q.brand))];
+        console.log(uK)
+  
+        // setBrands(uK)
+        // console.log(brands);
+
+
+      //  const uniqueData =  data.map (q => q.brand)
+      //  console.log(
+      //   uniqueData.filter((q, idx) => 
+      //   uniqueData.indexOf(q) === idx)
+      // );
+    //   const uN =  uniqueData.filter((q, idx) => uniqueData.indexOf(q) === idx)
+    // setBrands(uN)
+        
       })
       .catch((err) => console.log(err));
   }
+ 
 
   //products main search part
   const navigate = useNavigate();
@@ -107,7 +122,7 @@ export const AppProvider = ({ children }) => {
   function increaseCart(item) {
     const incC = cartProduct.map((i) => {
       if (i.id == item.id) {
-        i.quantity += 1;
+        i.quantity += 1; 
       }
       return i;
     });
@@ -139,35 +154,38 @@ export const AppProvider = ({ children }) => {
     setcartProduct((i) => result);
   }
 
-  //cart saving info for user in backendless part (when I save i update the whole thing so one person only has one cart)
-  //works, but put this in cart when click to add, add to array (update array) item and update backendless
+  //save cart in backendless: 1 cart per person, update if it is changed
   const sa = cartProduct.map((i) => i.id);
   console.log(sa);
   const savedCart = {
     productID: sa,
   };
   function saveCart() {
-        Backendless.Data.of( "Cart" ).save(savedCart)
-     .then( response => console.log("all saved"))
-     .catch(err => console.log(err))
+    Backendless.Data.of("Cart")
+      .save(savedCart, true)
+      .then((response) => console.log("all saved"))
+      .catch((err) => console.log(err));
   }
+
+  // Backendless.Data.of( "Cart" ).save(savedCart)
+  // .then( response => console.log("all saved"))
+  // .catch(err => console.log(err))
+
   //delete item from backendless if the quantity is zero
 
-
-
-//display items from User
-const [cartInfo, setCartInfo] = useState();
-function getCartInfo() {
-  Backendless.Data.of( "Cart" ).find()
-  .then((res) => {
-    console.log(res);
-    setCartInfo(res);
-  })
-  .catch((error) => {
-    console.error(error);
-  });
-}
-
+  //display items from User
+  const [cartInfo, setCartInfo] = useState();
+  function getCartInfo() {
+    Backendless.Data.of("Cart")
+      .find()
+      .then((res) => {
+        console.log(res);
+        setCartInfo(res);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
 
   // registration part
 
@@ -232,6 +250,21 @@ function getCartInfo() {
       .catch((error) => console.log(error));
   }
 
+  // check logged in or not registration page
+
+  function LoggedinOrNotReg() {
+    Backendless.UserService.isValidLogin()
+      .then((response) => {
+        console.log(response);
+        if (response == true) {
+          navigate("/profile");
+        } else {
+          navigate("/register");
+        }
+      })
+      .catch((error) => console.log(error));
+  }
+
   //check if logged in to go to fav page
   function LoggedinOrNotFavPage() {
     Backendless.UserService.isValidLogin()
@@ -259,6 +292,15 @@ function getCartInfo() {
       });
   }
 
+  // logout
+  function logout () {
+    Backendless.UserService.logout()
+    .then(response => {console.log("logged out")
+  navigate("/")
+  })
+    .catch(err => console.log(err))
+  }
+
   return (
     <AppContext.Provider
       value={{
@@ -268,7 +310,6 @@ function getCartInfo() {
         RegisterUser,
         LoginUser,
         categoriesSearchHandler,
-        brands,
         selectedProduct,
         selectProduct,
         addCart,
@@ -280,7 +321,11 @@ function getCartInfo() {
         saveCart,
         increaseCart,
         decreaseCart,
-        getCartInfo
+        getCartInfo,
+        LoggedinOrNotReg,
+        logout,
+        brands,
+        displayBrands
       }}
     >
       {children}
