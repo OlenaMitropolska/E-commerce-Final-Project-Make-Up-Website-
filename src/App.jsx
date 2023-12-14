@@ -40,6 +40,8 @@ function App() {
 <Route path="/profile" element={<Profile />} />
 </Routes>
 
+{/* <Route path="/profile" element={<Profile />} /> <Route path='/favoritespage' element={<FavoritesPage/>} /> */}
+
 
 
 

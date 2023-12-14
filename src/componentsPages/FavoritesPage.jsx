@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useAppContext } from '../context/appContext'
 
 function FavoritesPage() {
+  const {LoggedinOrNotFavPage} = useAppContext ()
+  useEffect(() => {
+    LoggedinOrNotFavPage ()
+  }, [])
   return (
-    <div>FavoritesPage</div>
+    <div className='main'>FavoritesPage</div>
   )
 }
 

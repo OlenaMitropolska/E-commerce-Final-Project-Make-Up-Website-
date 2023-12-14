@@ -1,12 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect} from 'react'
 import { useAppContext } from '../context/appContext'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 
-
 function Registration() {
-  const {RegisterUser}= useAppContext()
+  const {RegisterUser,LoggedinOrNot}= useAppContext()
+
+  useEffect(() => {
+    LoggedinOrNot ()
+  }, [])
 
 function registrationHandler (e) {
   e.preventDefault()

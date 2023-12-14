@@ -149,13 +149,30 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
       .catch(err => console.log(err));
    }
 
+  //protected routes 
+  // const [user, setUser] = useState(false) //Set to true in logged in if logged in
+
    //check if logged in then to profile page if not to login page
-   
    function LoggedinOrNot () {
     Backendless.UserService.isValidLogin()
     .then(response => {console.log(response) 
     if(response == true) {
       navigate("/profile")
+      // setUser(true)
+    }else {
+      navigate("/loginpage")
+    }
+    })
+    .catch(error => console.log(error));
+   }
+
+   //check if logged in to go to fav page
+   function LoggedinOrNotFavPage () {
+    Backendless.UserService.isValidLogin()
+    .then(response => {console.log(response) 
+    if(response == true) {
+      navigate("/favoritespage")
+      // setUser(true)
     }else {
       navigate("/loginpage")
     }
@@ -178,7 +195,7 @@ function RegisterUser(name,email,password,dateBirth,city,address, postcode) {
 
 
    return <AppContext.Provider value={{dataRetriever, searchSubmitHandler, products, RegisterUser, LoginUser, 
-   categoriesSearchHandler,brands, selectedProduct, selectProduct,addCart,cartProduct, LoggedinOrNot, getProfileInfo,userInfo }}>
+   categoriesSearchHandler,brands, selectedProduct, selectProduct,addCart,cartProduct, LoggedinOrNot,LoggedinOrNotFavPage, getProfileInfo,userInfo}}>
 {children}
    </AppContext.Provider>
 }
