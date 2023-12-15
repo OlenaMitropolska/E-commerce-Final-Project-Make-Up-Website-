@@ -1,13 +1,29 @@
 import React, { useEffect} from 'react'
 import { useAppContext } from '../context/appContext'
 import { Link } from 'react-router-dom'
+import { useState } from 'react'
 
 
 
 function Cart() {
-  const {cartProduct, increaseCart,decreaseCart,removeFromCart, displayCart} = useAppContext()
+
+// const [prod , setpro]=useState([])
+  const {cartProduct,setcartProduct, increaseCart,decreaseCart,removeFromCart, displayCart, cartInfo} = useAppContext()
   useEffect(() => {
     displayCart ()
+// console.log(cartInfo);
+// console.log(cartProduct);
+// if (cartInfo.length >0) {
+  
+//   setcartProduct (i=>[...cartProduct,...cartInfo])
+// }
+// else
+// {
+//   setcartProduct (i=>[...cartProduct])
+
+// }
+    //  call the data from backend
+    //  to add the data from backend to cartProduct [...cardProduct, ]
   }, [])
 
   return (

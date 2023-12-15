@@ -387,6 +387,22 @@ background-color: white;
         .purchaseMain button {
             font-size: 25px;
         }
+        .brnds {
+display: grid;
+width: 90%;
+grid-gap: 10px;
+grid-template-columns: 1fr 1fr 1fr 1fr;
+grid-auto-rows: 100px;
+grid-auto-flow: dense;
+padding: 0.5rem; 
+        }
+        .brandsMap {
+display: flex;
+ justify-content: center;
+ align-items: center;
+ text-transform: uppercase;
+ font-size: 16px;
+        }
        
     }
 
@@ -467,6 +483,9 @@ background-color: white;
                 width: fit-content;
                 padding: 20px 40px;
             }
+            .brnds {
+                grid-auto-rows: 120px;
+                        }
 
        
     }

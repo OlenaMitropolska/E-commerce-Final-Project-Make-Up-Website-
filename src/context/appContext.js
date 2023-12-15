@@ -8,55 +8,37 @@ import "react-toastify/dist/ReactToastify.css";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-  // api part
-  // function dataRetriever() {
-  //   axios
-  //     .get("https://makeup-api.herokuapp.com/api/v1/products.json")
-  //     .then((response) => console.log(response.data))
-  //     .catch((err) => console.log(err));
-  // }
 
-  //home page part -- do the map of brands if clicked on one, go to all products from this brand here with function works only if we click or smth, do otherwise
+  //home page
   const [brands, setBrands] = useState([]);
   function displayBrands() {
     axios
       .get("https://makeup-api.herokuapp.com/api/v1/products.json")
       .then((response) => {
-        const data = response.data
-        const uK = [...new Set(data.map(q => q.brand))];
-        console.log(uK)
-        setBrands(uK)
-  
-    //    const uniqueData =  data.map (q => q.brand)
-    //    console.log(
-    //   uniqueData.filter((q, idx) => 
-    //   uniqueData.indexOf(q) === idx)
-    //   );
-    //   const uN =  uniqueData.filter((q, idx) => uniqueData.indexOf(q) === idx)
-    // setBrands(uN)
-        
+        const data = response.data;
+        const uK = [...new Set(data.map((q) => q.brand))];
+        setBrands(uK);
       })
       .catch((err) => console.log(err));
   }
 
   //go to brand when clicked on home page
-  function seeBrand (item) {
-console.log(item)
-const itemM = item
-axios
-.get(
-  `http://makeup-api.herokuapp.com/api/v1/products.json?brand=${itemM}`
-)
-.then((response) => {
-  setProducts(response.data);
-  navigate("/products");
-})
-.catch((err) => {
-  console.log(err);
-  navigate("/");
-});
+  function seeBrand(item) {
+    console.log(item);
+    const itemM = item;
+    axios
+      .get(
+        `http://makeup-api.herokuapp.com/api/v1/products.json?brand=${itemM}`
+      )
+      .then((response) => {
+        setProducts(response.data);
+        navigate("/products");
+      })
+      .catch((err) => {
+        console.log(err);
+        navigate("/");
+      });
   }
- 
 
   //products main search part
   const navigate = useNavigate();
@@ -121,7 +103,6 @@ axios
         if (i.id == item.id) i.quantity += 1;
         return i;
       });
-
       setcartProduct(newCart);
       document.getElementById("my_modal_5").showModal();
     } else {
@@ -131,11 +112,11 @@ axios
   }
 
   //cart page empty or not check
-  function isCartEmpty () {
+  function isCartEmpty() {
     if (cartProduct.length < 1) {
-      navigate("/emptycart")
-    }else {
-      navigate("/cart")
+      navigate("/emptycart");
+    } else {
+      navigate("/cart");
     }
   }
 
@@ -143,11 +124,10 @@ axios
   function increaseCart(item) {
     const incC = cartProduct.map((i) => {
       if (i.id == item.id) {
-        i.quantity += 1; 
+        i.quantity += 1;
       }
       return i;
     });
-
     setcartProduct((i) => incC);
   }
 
@@ -171,54 +151,86 @@ axios
   }
 
   //save cart in backendless: 1 cart per person, update if it is changed
-  const sa = cartProduct.map((i) => i.id);
-  // console.log(sa);
-  const savedCart = {
-    productID: sa,
-  };
-  const [cartInfo, setCartInfo] = useState();
+
+  // const sa = cartProduct.map((i) => i.id);
+  // // console.log(sa);
+  // const savedCart = {
+  //   productID: sa,
+  // };
+  // display the cart for User
+  const [cartInfo, setCartInfo] = useState([]);
+  function displayCart() {
+    Backendless.Data.of("Cart")
+      .find()
+      .then((response) => {
+        // setCartInfo(response[0].productID)
+       if (response.length >= 1) {
+        
+         setcartProduct((i) => [...response[0].productID]);
+       }
+
+        // console.log("here");
+        console.log(response);
+        // console.log("here");
+      })
+      .catch((err) => console.log(err));
+  }
 
   function saveCart() {
     Backendless.Data.of("Cart")
-    .find()
-    .then((res) => {
-      console.log(res);
-      // setCartInfo(res.data);
-      console.log(cartInfo);
-if (res.length < 1) {
-  Backendless.Data.of( "Cart" ).save(savedCart)
-  .then( response => console.log("all saved"))
-  .catch(err => console.log(err))
-}else {
-  Backendless.Data.of( "Cart" ).save( {objectId: res[0].objectId, productID: sa })
- .then( res => console.log(res))
- .catch(err => console.log(err));
-}   
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-    }
+      .find()
+      .then((res) => {
+        console.log(res);
+        // setCartInfo(res.data);
+        // console.log(cartInfo);
+        if (res.length < 1) {
+          console.log(cartProduct);
+          Backendless.Data.of("Cart")
+            .save({productID: cartProduct})
+            .then((response) => console.log("all saved"))
+            .catch((err) => console.log(err));
+        } else {
+        //  const arr =  res[0].productID.filter((i) => {
+        //     let exist = false;
+        //     for (let p = 0; p < cartProduct.length; p++) {
+        //       const element = cartProduct[p];
+        //       if (i.id === element.id) {
+        //         exist = true;
+        //       }
+        //     }
+        //     if (!exist) {
 
-      //remove from cart and from backendless
+        //       return i
+        //     }
+        //   });
+        //   console.log(arr);
+          Backendless.Data.of("Cart")
+            .save({
+              objectId: res[0].objectId,
+              productID: [...res[0].productID, ...cartProduct],
+            })
+            .then((res) => {
+              console.log(res);
+              setcartProduct(res.productID);
+            })
+            .catch((err) => console.log(err));
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
+  //remove from cart and from backendless
   function removeFromCart(item) {
     const result = cartProduct.filter((i) => i.id != item.id);
     setcartProduct((i) => result);
 
-  Backendless.Data.of( "Cart" ).remove( savedCart )
-  .then(response => console.log(response))
-  .catch(err => console.log(err));
-
+    Backendless.Data.of("Cart")
+      .remove(result)
+      .then((response) => console.log(response))
+      .catch((err) => console.log(err));
   }
-
-//display the cart for User
-function displayCart () {
-  Backendless.Data.of( "Cart" ).find()
-  .then(response => {
-    setCartInfo(response)
-    console.log(response)})
-  .catch(err => console.log(err))
-}
 
   // registration part
   function RegisterUser(
@@ -240,15 +252,12 @@ function displayCart () {
     User.Postcode = postcode;
     Backendless.UserService.register(User)
       .then((res) => {
-        // console.log(res);
-
         toast.success("You have successfully registered!", {
           position: toast.POSITION.TOP_CENTER,
         }); //add the instead of text a div element
         navigate("/loginpage");
       })
       .catch((error) => {
-        // console.log(error);
         alert("smth went wrong, please try again!");
       });
   }
@@ -257,16 +266,12 @@ function displayCart () {
   function LoginUser(loginEmail, loginPassword) {
     Backendless.UserService.login(loginEmail, loginPassword, true)
       .then((response) => {
-        // console.log("success");
 
         getProfileInfo();
         navigate("/");
       })
       .catch((err) => console.log(err));
   }
-
-  //protected routes
-  // const [user, setUser] = useState(false) //Set to true in logged in if logged in
 
   //check if logged in then to profile page if not to login page
   function LoggedinOrNot() {
@@ -283,11 +288,9 @@ function displayCart () {
   }
 
   // check logged in or not registration page
-
   function LoggedinOrNotReg() {
     Backendless.UserService.isValidLogin()
       .then((response) => {
-        // console.log(response);
         if (response == true) {
           navigate("/profile");
         } else {
@@ -301,7 +304,6 @@ function displayCart () {
   function LoggedinOrNotFavPage() {
     Backendless.UserService.isValidLogin()
       .then((response) => {
-        // console.log(response);
         if (response == true) {
           navigate("/favoritespage");
         } else {
@@ -316,7 +318,6 @@ function displayCart () {
   function getProfileInfo() {
     Backendless.UserService.getCurrentUser()
       .then((res) => {
-        // console.log(res);
         setUserInfo(res);
       })
       .catch((error) => {
@@ -325,12 +326,13 @@ function displayCart () {
   }
 
   // logout
-  function logout () {
+  function logout() {
     Backendless.UserService.logout()
-    .then(response => {console.log("logged out")
-  navigate("/")
-  })
-    .catch(err => console.log(err))
+      .then((response) => {
+        console.log("logged out");
+        navigate("/");
+      })
+      .catch((err) => console.log(err));
   }
 
   return (
@@ -359,8 +361,9 @@ function displayCart () {
         removeFromCart,
         isCartEmpty,
         displayCart,
-        seeBrand
-
+        seeBrand,
+        cartInfo,
+        setcartProduct,
       }}
     >
       {children}

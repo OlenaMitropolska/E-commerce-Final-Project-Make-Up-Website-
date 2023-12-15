@@ -12,7 +12,7 @@ displayBrands()
     <div className='brands'>
       <h2 className='text-lg uppercase'>Our brand selection</h2>
 
-      <div>{brands && brands.map ((brand,k)=> 
+      <div className='brnds'>{brands && brands.map ((brand,k)=> 
       <div onClick={() => seeBrand(brand)} className='brandsMap' key={k}>{brand}</div>
       )}
       </div>
