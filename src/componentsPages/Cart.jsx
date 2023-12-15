@@ -5,14 +5,15 @@ import { Link } from 'react-router-dom'
 
 
 function Cart() {
-  const {cartProduct, increaseCart,decreaseCart,getCartInfo,removeFromCart} = useAppContext()
+  const {cartProduct, increaseCart,decreaseCart,removeFromCart, displayCart} = useAppContext()
   useEffect(() => {
-    // getCartInfo () 
+    displayCart ()
   }, [])
 
   return (
     <div className='mainCart'>
-      <button onClick={getCartInfo} className='btn'>get Cart Info</button>
+      <button onClick={displayCart }>Display Info</button>
+      {/* <button onClick={getCartInfo} className='btn'>get Cart Info</button> */}
       {/* <button className='btn' onClick={saveCart }>save cart </button> */}
       
 <h2 className='uppercase self-start'>Your shopping cart</h2>
@@ -77,7 +78,7 @@ function Cart() {
 {/* end */}
 
 <p className='totalCart text-lg'> Total: {cartProduct.reduce((acc, cur) => (acc += cur.quantity * Number(cur.price)),0).toFixed(2)} &euro;</p>
-<Link to={"/purchase"}><button className='btn w-full btnCart'>Purchase</button></Link>
+<Link className='btnCartHolder' to={"/purchase"}><button className='btn w-full btnCart'>Purchase</button></Link>
 
    
 

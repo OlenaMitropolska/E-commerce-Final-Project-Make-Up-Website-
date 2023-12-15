@@ -24,7 +24,7 @@ function Purchase() {
 
     </tbody>
   </table>
-  <div className='flex justify-center align-center p-4'><Link to={"/thankyou"}><button className='btn self-center'>Purchase</button></Link> </div>
+  <div className='flex justify-center align-center p-4'><Link to={"/thankyou"}><button className='btn self-center'>Complete Purchase</button></Link> </div>
   </div>
 </div>
 

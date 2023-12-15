@@ -25,21 +25,23 @@ export const AppProvider = ({ children }) => {
         const data = response.data
         const uK = [...new Set(data.map(q => q.brand))];
         console.log(uK)
+        setBrands(uK)
   
-        // setBrands(uK)
-        // console.log(brands);
-
-
-      //  const uniqueData =  data.map (q => q.brand)
-      //  console.log(
-      //   uniqueData.filter((q, idx) => 
-      //   uniqueData.indexOf(q) === idx)
-      // );
+    //    const uniqueData =  data.map (q => q.brand)
+    //    console.log(
+    //   uniqueData.filter((q, idx) => 
+    //   uniqueData.indexOf(q) === idx)
+    //   );
     //   const uN =  uniqueData.filter((q, idx) => uniqueData.indexOf(q) === idx)
     // setBrands(uN)
         
       })
       .catch((err) => console.log(err));
+  }
+
+  //go to brand when clicked on home page
+  function seeBrand () {
+
   }
  
 
@@ -154,11 +156,6 @@ export const AppProvider = ({ children }) => {
       removeFromCart(item);
     }
   }
-  //remove from cart
-  function removeFromCart(item) {
-    const result = cartProduct.filter((i) => i.id != item.id);
-    setcartProduct((i) => result);
-  }
 
   //save cart in backendless: 1 cart per person, update if it is changed
   const sa = cartProduct.map((i) => i.id);
@@ -166,37 +163,49 @@ export const AppProvider = ({ children }) => {
   const savedCart = {
     productID: sa,
   };
+  const [cartInfo, setCartInfo] = useState();
+
   function saveCart() {
+    Backendless.Data.of("Cart")
+    .find()
+    .then((res) => {
+      console.log(res);
+      // setCartInfo(res.data);
+      console.log(cartInfo);
+if (res.length < 1) {
   Backendless.Data.of( "Cart" ).save(savedCart)
   .then( response => console.log("all saved"))
   .catch(err => console.log(err))
-  }
-  // Backendless.Data.of("Cart")
-  // .save(savedCart, true)
-  // .then((response) => console.log("all saved"))
-  // .catch((err) => console.log(err));
+}else {
+  Backendless.Data.of( "Cart" ).save( {objectId: res[0].objectId, productID: sa })
+ .then( res => console.log(res))
+ .catch(err => console.log(err));
+}   
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+    }
 
-  // Backendless.Data.of( "Cart" ).save(savedCart)
-  // .then( response => console.log("all saved"))
-  // .catch(err => console.log(err))
+      //remove from cart and from backendless
+  function removeFromCart(item) {
+    const result = cartProduct.filter((i) => i.id != item.id);
+    setcartProduct((i) => result);
 
-  //delete item from backendless if the quantity is zero
+  Backendless.Data.of( "Cart" ).remove( savedCart )
+  .then(response => console.log(response))
+  .catch(err => console.log(err));
 
-  //display items from User
-  const [cartInfo, setCartInfo] = useState();
-  function getCartInfo() {
-    Backendless.Data.of("Cart")
-      .find()
-      .then((res) => {
-        console.log(res);
-        setCartInfo(res.data);
-        console.log(cartInfo);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
   }
 
+//display the cart for User
+function displayCart () {
+  Backendless.Data.of( "Cart" ).find()
+  .then(response => {
+    setCartInfo(response)
+    console.log(response)})
+  .catch(err => console.log(err))
+}
 
   // registration part
   function RegisterUser(
@@ -330,13 +339,15 @@ export const AppProvider = ({ children }) => {
         saveCart,
         increaseCart,
         decreaseCart,
-        getCartInfo,
         LoggedinOrNotReg,
         logout,
         brands,
         displayBrands,
         removeFromCart,
-        isCartEmpty
+        isCartEmpty,
+        displayCart,
+        seeBrand
+        
       }}
     >
       {children}

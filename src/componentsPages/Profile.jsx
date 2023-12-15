@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 
 function Profile() {
-    const {getProfileInfo,userInfo, LoggedinOrNot, logout} = useAppContext()
+    const {getProfileInfo, userInfo, LoggedinOrNot, logout} = useAppContext()
     useEffect(() => {
       LoggedinOrNot ()
       getProfileInfo () 
