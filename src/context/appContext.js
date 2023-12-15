@@ -40,8 +40,21 @@ export const AppProvider = ({ children }) => {
   }
 
   //go to brand when clicked on home page
-  function seeBrand () {
-
+  function seeBrand (item) {
+console.log(item)
+const itemM = item
+axios
+.get(
+  `http://makeup-api.herokuapp.com/api/v1/products.json?brand=${itemM}`
+)
+.then((response) => {
+  setProducts(response.data);
+  navigate("/products");
+})
+.catch((err) => {
+  console.log(err);
+  navigate("/");
+});
   }
  
 
@@ -347,7 +360,7 @@ function displayCart () {
         isCartEmpty,
         displayCart,
         seeBrand
-        
+
       }}
     >
       {children}
