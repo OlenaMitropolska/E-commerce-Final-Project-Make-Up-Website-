@@ -8,7 +8,6 @@ import "react-toastify/dist/ReactToastify.css";
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-
   //home page
   const [brands, setBrands] = useState([]);
   function displayBrands() {
@@ -158,20 +157,31 @@ export const AppProvider = ({ children }) => {
   //   productID: sa,
   // };
   // display the cart for User
+
+  //  const arr =  res[0].productID.filter((i) => {
+  //     let exist = false;
+  //     for (let p = 0; p < cartProduct.length; p++) {
+  //       const element = cartProduct[p];
+  //       if (i.id === element.id) {
+  //         exist = true;
+  //       }
+  //     }
+  //     if (!exist) {
+
+  //       return i
+  //     }
+  //   });
+  //   console.log(arr);
+
   const [cartInfo, setCartInfo] = useState([]);
   function displayCart() {
     Backendless.Data.of("Cart")
       .find()
       .then((response) => {
-        // setCartInfo(response[0].productID)
-       if (response.length >= 1) {
-        
-         setcartProduct((i) => [...response[0].productID]);
-       }
-
-        // console.log("here");
+        if (response.length >= 1) {
+          setcartProduct((i) => [...response[0].productID]);
+        }
         console.log(response);
-        // console.log("here");
       })
       .catch((err) => console.log(err));
   }
@@ -181,29 +191,13 @@ export const AppProvider = ({ children }) => {
       .find()
       .then((res) => {
         console.log(res);
-        // setCartInfo(res.data);
-        // console.log(cartInfo);
         if (res.length < 1) {
           console.log(cartProduct);
           Backendless.Data.of("Cart")
-            .save({productID: cartProduct})
+            .save({ productID: cartProduct })
             .then((response) => console.log("all saved"))
             .catch((err) => console.log(err));
         } else {
-        //  const arr =  res[0].productID.filter((i) => {
-        //     let exist = false;
-        //     for (let p = 0; p < cartProduct.length; p++) {
-        //       const element = cartProduct[p];
-        //       if (i.id === element.id) {
-        //         exist = true;
-        //       }
-        //     }
-        //     if (!exist) {
-
-        //       return i
-        //     }
-        //   });
-        //   console.log(arr);
           Backendless.Data.of("Cart")
             .save({
               objectId: res[0].objectId,
@@ -212,6 +206,7 @@ export const AppProvider = ({ children }) => {
             .then((res) => {
               console.log(res);
               setcartProduct(res.productID);
+              console.log(res.productID);
             })
             .catch((err) => console.log(err));
         }
@@ -226,10 +221,10 @@ export const AppProvider = ({ children }) => {
     const result = cartProduct.filter((i) => i.id != item.id);
     setcartProduct((i) => result);
 
-    Backendless.Data.of("Cart")
-      .remove(result)
-      .then((response) => console.log(response))
-      .catch((err) => console.log(err));
+    // Backendless.Data.of("Cart")
+    //   .remove(result)
+    //   .then((response) => console.log(response))
+    //   .catch((err) => console.log(err));
   }
 
   // registration part
@@ -266,7 +261,6 @@ export const AppProvider = ({ children }) => {
   function LoginUser(loginEmail, loginPassword) {
     Backendless.UserService.login(loginEmail, loginPassword, true)
       .then((response) => {
-
         getProfileInfo();
         navigate("/");
       })

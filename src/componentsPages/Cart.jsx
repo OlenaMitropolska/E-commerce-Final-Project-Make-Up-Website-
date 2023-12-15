@@ -8,27 +8,14 @@ import { useState } from 'react'
 function Cart() {
 
 // const [prod , setpro]=useState([])
-  const {cartProduct,setcartProduct, increaseCart,decreaseCart,removeFromCart, displayCart, cartInfo} = useAppContext()
+  const {cartProduct, increaseCart,decreaseCart,removeFromCart, displayCart} = useAppContext()
   useEffect(() => {
     displayCart ()
-// console.log(cartInfo);
-// console.log(cartProduct);
-// if (cartInfo.length >0) {
-  
-//   setcartProduct (i=>[...cartProduct,...cartInfo])
-// }
-// else
-// {
-//   setcartProduct (i=>[...cartProduct])
-
-// }
-    //  call the data from backend
-    //  to add the data from backend to cartProduct [...cardProduct, ]
   }, [])
 
   return (
     <div className='mainCart'>
-      <button onClick={displayCart }>Display Info</button>
+      {/* <button onClick={displayCart }>Display Info</button> */}
       {/* <button onClick={getCartInfo} className='btn'>get Cart Info</button> */}
       {/* <button className='btn' onClick={saveCart }>save cart </button> */}
       
@@ -84,7 +71,7 @@ function Cart() {
               <button onClick={() => increaseCart(cartP)} className='border border-solid border-black text-2xl px-3.5 rounded'>+</button>
             </div>
                 </td> 
-              <td>{cartProduct.reduce((acc, cur) => (acc += cur.quantity * Number(cur.price)),0).toFixed(2)} &euro;</td> 
+              <td>Price pro item: {cartP.price}0 &euro;</td> 
             </tr>
           </tbody> 
         </table>

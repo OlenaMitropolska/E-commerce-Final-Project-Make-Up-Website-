@@ -17,6 +17,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    overflow-x: hidden;
 }
 .sub-nav {
 padding-left: 20px;
@@ -138,7 +139,7 @@ background-color: white;
     display: none;
 }
 .productInCart {
-    height: 200px;
+    height: 250px;
     width: 100%;
     display: flex;
     border-bottom: 1px solid gray;
@@ -163,6 +164,7 @@ background-color: white;
 .cartTablet {
     display: none;
 }
+
 .profileMainBtn {
     width: 100%;
     display: flex;
@@ -179,7 +181,6 @@ background-color: white;
     width: 100%;
     padding-top: 30px;
     height: 300px;
-
 }
 .thanks {
     display: flex;
@@ -207,8 +208,8 @@ background-color: white;
     padding: 15px;
     margin-bottom: 10px;
     text-align: center;
+    text-transform: uppercase;
 }
-
 
 
 
@@ -360,10 +361,11 @@ background-color: white;
             flex-grow: 1;
         }
         .profileMain {
-            background-color: beige;
-            display: row;
+            display: flex;
             align-items: start;
         }
+       
+        
         .profileMainBtn {
             width: 100%;
             display: flex;
@@ -400,7 +402,6 @@ padding: 0.5rem;
 display: flex;
  justify-content: center;
  align-items: center;
- text-transform: uppercase;
  font-size: 16px;
         }
        
@@ -470,6 +471,11 @@ display: flex;
         .profileInfo {
             justify-content: center;
             align-items: center;
+        }
+        .profileMaintext {
+        position: relative;
+        text-align: center;
+        left: 43%;
         }
         .purchaseMain {
       bottom: 0;
