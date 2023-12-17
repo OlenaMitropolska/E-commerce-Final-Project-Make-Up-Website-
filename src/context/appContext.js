@@ -23,7 +23,7 @@ export const AppProvider = ({ children }) => {
 
   //go to brand when clicked on home page
   function seeBrand(item) {
-    console.log(item);
+    // console.log(item);
     const itemM = item;
     axios
       .get(
@@ -86,21 +86,27 @@ export const AppProvider = ({ children }) => {
   //selected product part
   const [selectedProduct, setselectedProduct] = useState([]);
   function selectProduct(click) {
-    setselectedProduct((i) => [...i, click]);
+    if (selectedProduct.length<1) {
+      setselectedProduct((i) => [...i, click]);
+    }else {
+const i = selectedProduct.findIndex(x => x.id === selectedProduct[0].id)
+selectedProduct[i] = click
+// console.log(selectedProduct)
+    }
     navigate("/product");
   }
 
   //cart part
 
     // local storage
-    const storage = JSON.parse(localStorage.getItem('cartStorage'));
-    const [cartProduct, setcartProduct] = useState(storage);
-    useEffect(() => {
-      localStorage.setItem('cartStorage', JSON.stringify(cartProduct));
-    }, [cartProduct]);
+    // const storage = JSON.parse(localStorage.getItem('cartStorage'));
+    // const [cartProduct, setcartProduct] = useState(storage);
+    // useEffect(() => {
+    //   localStorage.setItem('cartStorage', JSON.stringify(cartProduct));
+    // }, [cartProduct]);
 
   //cart add
-  // const [cartProduct, setcartProduct] = useState([]);
+  const [cartProduct, setcartProduct] = useState([]);
   function addCart(item) {
     const obj = { ...item, quantity: 1 };
     const res = cartProduct.find((i) => i.id == item.id);
@@ -304,7 +310,7 @@ export const AppProvider = ({ children }) => {
   function logout() {
     Backendless.UserService.logout()
       .then((response) => {
-        console.log("logged out");
+        alert("you have been logged out");
         navigate("/");
       })
       .catch((err) => console.log(err));
