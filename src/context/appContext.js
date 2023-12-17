@@ -91,7 +91,6 @@ export const AppProvider = ({ children }) => {
     }else {
 const i = selectedProduct.findIndex(x => x.id === selectedProduct[0].id)
 selectedProduct[i] = click
-// console.log(selectedProduct)
     }
     navigate("/product");
   }
@@ -105,8 +104,11 @@ selectedProduct[i] = click
     //   localStorage.setItem('cartStorage', JSON.stringify(cartProduct));
     // }, [cartProduct]);
 
+ 
   //cart add
-  const [cartProduct, setcartProduct] = useState([]);
+  // const [cartProduct, setcartProduct] = useState([]);
+  const storage = JSON.parse(localStorage.getItem('cartStorage'));
+  const [cartProduct, setcartProduct] = useState(storage);
   function addCart(item) {
     const obj = { ...item, quantity: 1 };
     const res = cartProduct.find((i) => i.id == item.id);
@@ -122,6 +124,9 @@ selectedProduct[i] = click
       document.getElementById("my_modal_5").showModal();
     }
   }
+  useEffect(() => {
+    localStorage.setItem('cartStorage', JSON.stringify(cartProduct));
+  }, [cartProduct]);
 
   //cart page empty or not check
   function isCartEmpty() {
