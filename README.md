@@ -30,7 +30,5 @@ Please go to the cart and press purchase, then you will be redirected to the pay
 
 ### User can register
 
-
-
 ### User can log in and log out of the account
 
