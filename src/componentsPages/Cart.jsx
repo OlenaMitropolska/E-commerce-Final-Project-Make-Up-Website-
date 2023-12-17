@@ -7,11 +7,17 @@ import { useState } from 'react'
 
 function Cart() {
 
-// const [prod , setpro]=useState([])
-  const {cartProduct, increaseCart,decreaseCart,removeFromCart, displayCart} = useAppContext()
-  useEffect(() => {
-    displayCart ()
-  }, [])
+
+  const {cartProduct, increaseCart,decreaseCart,removeFromCart, setcartProduct} = useAppContext()
+  // useEffect(() => {
+  //   localStorage.setItem('cartStorage', JSON.stringify(cartProduct));
+  //   console.log(storage);
+  //   // setcartProduct(storage);
+  //   // console.log(cartProduct);
+  // }, []);
+
+
+
 
   return (
     <div className='mainCart'>

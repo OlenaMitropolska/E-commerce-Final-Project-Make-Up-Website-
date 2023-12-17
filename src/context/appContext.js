@@ -92,8 +92,15 @@ export const AppProvider = ({ children }) => {
 
   //cart part
 
+    // local storage
+    const storage = JSON.parse(localStorage.getItem('cartStorage'));
+    const [cartProduct, setcartProduct] = useState(storage);
+    useEffect(() => {
+      localStorage.setItem('cartStorage', JSON.stringify(cartProduct));
+    }, [cartProduct]);
+
   //cart add
-  const [cartProduct, setcartProduct] = useState([]);
+  // const [cartProduct, setcartProduct] = useState([]);
   function addCart(item) {
     const obj = { ...item, quantity: 1 };
     const res = cartProduct.find((i) => i.id == item.id);
@@ -149,83 +156,57 @@ export const AppProvider = ({ children }) => {
     }
   }
 
-  //save cart in backendless: 1 cart per person, update if it is changed
-
-  // const sa = cartProduct.map((i) => i.id);
-  // // console.log(sa);
-  // const savedCart = {
-  //   productID: sa,
-  // };
-  // display the cart for User
-
-  //  const arr =  res[0].productID.filter((i) => {
-  //     let exist = false;
-  //     for (let p = 0; p < cartProduct.length; p++) {
-  //       const element = cartProduct[p];
-  //       if (i.id === element.id) {
-  //         exist = true;
-  //       }
-  //     }
-  //     if (!exist) {
-
-  //       return i
-  //     }
-  //   });
-  //   console.log(arr);
-
-  const [cartInfo, setCartInfo] = useState([]);
-  function displayCart() {
-    Backendless.Data.of("Cart")
-      .find()
-      .then((response) => {
-        if (response.length >= 1) {
-          setcartProduct((i) => [...response[0].productID]);
-        }
-        console.log(response);
-      })
-      .catch((err) => console.log(err));
-  }
-
-  function saveCart() {
-    Backendless.Data.of("Cart")
-      .find()
-      .then((res) => {
-        console.log(res);
-        if (res.length < 1) {
-          console.log(cartProduct);
-          Backendless.Data.of("Cart")
-            .save({ productID: cartProduct })
-            .then((response) => console.log("all saved"))
-            .catch((err) => console.log(err));
-        } else {
-          Backendless.Data.of("Cart")
-            .save({
-              objectId: res[0].objectId,
-              productID: [...res[0].productID, ...cartProduct],
-            })
-            .then((res) => {
-              console.log(res);
-              setcartProduct(res.productID);
-              console.log(res.productID);
-            })
-            .catch((err) => console.log(err));
-        }
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-  }
-
   //remove from cart and from backendless
   function removeFromCart(item) {
-    const result = cartProduct.filter((i) => i.id != item.id);
-    setcartProduct((i) => result);
+      const result = cartProduct.filter((i) => i.id != item.id);
+      setcartProduct((i) => result);
+    }
 
-    // Backendless.Data.of("Cart")
-    //   .remove(result)
-    //   .then((response) => console.log(response))
-    //   .catch((err) => console.log(err));
-  }
+  //save cart in backendless: 1 cart per person, update if it is changed
+
+  // const [cartInfo, setCartInfo] = useState([]);
+  // function displayCart() {
+  //   Backendless.Data.of("Cart")
+  //     .find()
+  //     .then((response) => {
+  //       if (response.length >= 1) {
+  //         setcartProduct((i) => [...response[0].productID]);
+  //       }
+  //       console.log(response);
+  //     })
+  //     .catch((err) => console.log(err));
+  // }
+
+  // function saveCart() {
+  //   Backendless.Data.of("Cart")
+  //     .find()
+  //     .then((res) => {
+  //       console.log(res);
+  //       if (res.length < 1) {
+  //         console.log(cartProduct);
+  //         Backendless.Data.of("Cart")
+  //           .save({ productID: cartProduct })
+  //           .then((response) => console.log("all saved"))
+  //           .catch((err) => console.log(err));
+  //       } else {
+  //         Backendless.Data.of("Cart")
+  //           .save({
+  //             objectId: res[0].objectId,
+  //             productID: [...res[0].productID, ...cartProduct],
+  //           })
+  //           .then((res) => {
+  //             console.log(res);
+  //             setcartProduct(res.productID);
+  //             console.log(res.productID);
+  //           })
+  //           .catch((err) => console.log(err));
+  //       }
+  //     })
+  //     .catch((error) => {
+  //       console.error(error);
+  //     });
+  // }
+
 
   // registration part
   function RegisterUser(
@@ -345,7 +326,6 @@ export const AppProvider = ({ children }) => {
         LoggedinOrNotFavPage,
         getProfileInfo,
         userInfo,
-        saveCart,
         increaseCart,
         decreaseCart,
         LoggedinOrNotReg,
@@ -354,9 +334,7 @@ export const AppProvider = ({ children }) => {
         displayBrands,
         removeFromCart,
         isCartEmpty,
-        displayCart,
         seeBrand,
-        cartInfo,
         setcartProduct,
       }}
     >
