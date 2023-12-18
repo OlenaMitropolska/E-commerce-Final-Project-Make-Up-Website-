@@ -14,8 +14,8 @@ export const AppProvider = ({ children }) => {
     axios
       .get("https://makeup-api.herokuapp.com/api/v1/products.json", {
         headers: {
-          "Content-Type": 'text/json'
-        }
+          "Content-Type": "text/json",
+        },
       })
       .then((response) => {
         const data = response.data;
@@ -31,10 +31,11 @@ export const AppProvider = ({ children }) => {
     const itemM = item;
     axios
       .get(
-        `http://makeup-api.herokuapp.com/api/v1/products.json?brand=${itemM}`, {
+        `http://makeup-api.herokuapp.com/api/v1/products.json?brand=${itemM}`,
+        {
           headers: {
-            "Content-Type": 'text/json'
-          }
+            "Content-Type": "text/json",
+          },
         }
       )
       .then((response) => {
@@ -264,7 +265,7 @@ export const AppProvider = ({ children }) => {
         getProfileInfo();
         navigate("/");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert("Something went wrong, please try again"));
   }
 
   //check if logged in then to profile page if not to login page
