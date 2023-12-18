@@ -27,7 +27,11 @@ export const AppProvider = ({ children }) => {
     const itemM = item;
     axios
       .get(
-        `http://makeup-api.herokuapp.com/api/v1/products.json?brand=${itemM}`
+        `http://makeup-api.herokuapp.com/api/v1/products.json?brand=${itemM}`, {
+          headers: {
+            "Content-Type": 'text/json'
+          }
+        }
       )
       .then((response) => {
         setProducts(response.data);
@@ -86,28 +90,29 @@ export const AppProvider = ({ children }) => {
   //selected product part
   const [selectedProduct, setselectedProduct] = useState([]);
   function selectProduct(click) {
-    if (selectedProduct.length<1) {
+    if (selectedProduct.length < 1) {
       setselectedProduct((i) => [...i, click]);
-    }else {
-const i = selectedProduct.findIndex(x => x.id === selectedProduct[0].id)
-selectedProduct[i] = click
+    } else {
+      const i = selectedProduct.findIndex(
+        (x) => x.id === selectedProduct[0].id
+      );
+      selectedProduct[i] = click;
     }
     navigate("/product");
   }
 
   //cart part
 
-    // local storage
-    // const storage = JSON.parse(localStorage.getItem('cartStorage'));
-    // const [cartProduct, setcartProduct] = useState(storage);
-    // useEffect(() => {
-    //   localStorage.setItem('cartStorage', JSON.stringify(cartProduct));
-    // }, [cartProduct]);
+  // local storage
+  // const storage = JSON.parse(localStorage.getItem('cartStorage'));
+  // const [cartProduct, setcartProduct] = useState(storage);
+  // useEffect(() => {
+  //   localStorage.setItem('cartStorage', JSON.stringify(cartProduct));
+  // }, [cartProduct]);
 
- 
   //cart add
   // const [cartProduct, setcartProduct] = useState([]);
-  const storage = JSON.parse(localStorage.getItem('cartStorage'));
+  const storage = JSON.parse(localStorage.getItem("cartStorage"));
   const [cartProduct, setcartProduct] = useState(storage);
   function addCart(item) {
     const obj = { ...item, quantity: 1 };
@@ -125,7 +130,7 @@ selectedProduct[i] = click
     }
   }
   useEffect(() => {
-    localStorage.setItem('cartStorage', JSON.stringify(cartProduct));
+    localStorage.setItem("cartStorage", JSON.stringify(cartProduct));
   }, [cartProduct]);
 
   //cart page empty or not check
@@ -169,9 +174,9 @@ selectedProduct[i] = click
 
   //remove from cart and from backendless
   function removeFromCart(item) {
-      const result = cartProduct.filter((i) => i.id != item.id);
-      setcartProduct((i) => result);
-    }
+    const result = cartProduct.filter((i) => i.id != item.id);
+    setcartProduct((i) => result);
+  }
 
   //save cart in backendless: 1 cart per person, update if it is changed
 
@@ -217,7 +222,6 @@ selectedProduct[i] = click
   //       console.error(error);
   //     });
   // }
-
 
   // registration part
   function RegisterUser(
