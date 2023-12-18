@@ -12,7 +12,11 @@ export const AppProvider = ({ children }) => {
   const [brands, setBrands] = useState([]);
   function displayBrands() {
     axios
-      .get("https://makeup-api.herokuapp.com/api/v1/products.json")
+      .get("https://makeup-api.herokuapp.com/api/v1/products.json", {
+        headers: {
+          "Content-Type": 'text/json'
+        }
+      })
       .then((response) => {
         const data = response.data;
         const uK = [...new Set(data.map((q) => q.brand))];
