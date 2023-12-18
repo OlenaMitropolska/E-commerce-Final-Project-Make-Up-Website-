@@ -14,7 +14,7 @@ export const AppProvider = ({ children }) => {
     axios
       .get("https://makeup-api.herokuapp.com/api/v1/products.json", {
         headers: {
-          "Content-Type": "text/json",
+          "Content-Type": "application/json",
         },
       })
       .then((response) => {
@@ -34,7 +34,7 @@ export const AppProvider = ({ children }) => {
         `http://makeup-api.herokuapp.com/api/v1/products.json?brand=${itemM}`,
         {
           headers: {
-            "Content-Type": "text/json",
+            "Content-Type": "application/json",
           },
         }
       )
@@ -55,7 +55,12 @@ export const AppProvider = ({ children }) => {
   function searchSubmitHandler(category) {
     axios
       .get(
-        `http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${category}`
+        `http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${category}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       )
       .then((response) => {
         setProducts(response.data);
@@ -71,7 +76,12 @@ export const AppProvider = ({ children }) => {
   function categoriesSearchHandler(categorySearch) {
     axios
       .get(
-        `http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${categorySearch}`
+        `http://makeup-api.herokuapp.com/api/v1/products.json?product_type=${categorySearch}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
       )
       .then((response) => {
         const data = response.data;
